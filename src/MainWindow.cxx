@@ -86,16 +86,10 @@ void MainWindow::openFile() {
 	// open a file dialog
 	auto selected_file = QFileDialog::getOpenFileName(this, tr("Open a file"), QApplication::applicationDirPath());
 
-	if (!selected_file.isNull())
-	{
-		std::cout << selected_file.toStdString() << std::endl;
-	}
-
-	std::string inputFilename = selected_file.toStdString();
-
-	vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
-	//vtkNew<vtkSTLReader> reader;
+	if (selected_file.isNull()) return;
 	
+	vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
+	std::string inputFilename = selected_file.toLocal8Bit();
 	reader->SetFileName(inputFilename.c_str());
 	reader->Update();
 
