@@ -20,6 +20,8 @@
 #include <vtkWindowToImageFilter.h>
 #include <vtkPNGWriter.h>
 
+#include <vtkCylinderSource.h>
+
 #include <QFileDialog>
 
 // Constructor
@@ -37,8 +39,11 @@ MainWindow::MainWindow()
   this->ui->qvtkWidget->SetRenderWindow(renderWindow);
 
   // Sphere
-  vtkNew<vtkSphereSource> sphereSource;
-  sphereSource->Update();
+  //vtkNew<vtkSphereSource> sphereSource;
+  //sphereSource->Update();
+  vtkSmartPointer<vtkCylinderSource> sphereSource = vtkSmartPointer<vtkCylinderSource>::New();
+  sphereSource->SetResolution(210);
+
   vtkNew<vtkPolyDataMapper> sphereMapper;
   sphereMapper->SetInputConnection(sphereSource->GetOutputPort());
   vtkNew<vtkActor> sphereActor;
