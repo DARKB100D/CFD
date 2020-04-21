@@ -110,11 +110,12 @@ void MainWindow::resetView() {
 	//this->sphereActor->GetProperty()->SetColor(colors->GetColor4d("Green").GetData());
 	this->renderer->ResetCamera();
 	this->renderer->GetRenderWindow()->Render();
-
 }
 
 void MainWindow::savePNG() {
-	auto selected_file = QFileDialog::getSaveFileName(this, tr("Save screenshot"), QApplication::applicationDirPath(), "*.png");
+	QString selected_file = QFileDialog::getSaveFileName(this, tr("Save screenshot"), QApplication::applicationDirPath(), "*.png");
+	
+	if (selected_file.isNull()) return;
 
 	// Screenshot  
 	vtkSmartPointer<vtkWindowToImageFilter> windowToImageFilter =
