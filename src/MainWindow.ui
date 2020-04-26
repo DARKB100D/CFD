@@ -11,17 +11,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Вычислительная гемодинамика</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res/Resource.qrc">
+    <normaloff>:/Application/icon 24 x 24.png</normaloff>:/Application/icon 24 x 24.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QPushButton" name="btnOpenFile">
-      <property name="text">
-       <string>Open file</string>
-      </property>
-     </widget>
-    </item>
     <item>
      <widget class="QPushButton" name="btnReset">
       <property name="text">
@@ -37,36 +34,106 @@
      </widget>
     </item>
     <item>
+     <widget class="QPushButton" name="btnOpenFile">
+      <property name="text">
+       <string>Open file</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QVTKOpenGLNativeWidget" name="qvtkWidget" native="true"/>
     </item>
    </layout>
   </widget>
-  <action name="actionOpenFile">
-   <property name="enabled">
-    <bool>true</bool>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>964</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Правка</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>Вид</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Инструменты</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Помощь</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuView"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="res/Resource.qrc">
+     <normaloff>:/Application/info.png</normaloff>:/Application/info.png</iconset>
    </property>
    <property name="text">
-    <string>Open File...</string>
+    <string>О программе</string>
    </property>
   </action>
-  <action name="actionExit">
-   <property name="text">
-    <string>Exit</string>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="res/Resource.qrc">
+     <normaloff>:/Application/open.png</normaloff>:/Application/open.png</iconset>
    </property>
-  </action>
-  <action name="actionPrint">
    <property name="text">
-    <string>Print</string>
-   </property>
-  </action>
-  <action name="actionHelp">
-   <property name="text">
-    <string>Help</string>
+    <string>Открыть...</string>
    </property>
   </action>
   <action name="actionSave">
+   <property name="icon">
+    <iconset resource="res/Resource.qrc">
+     <normaloff>:/Application/save.png</normaloff>:/Application/save.png</iconset>
+   </property>
    <property name="text">
-    <string>Save</string>
+    <string>Сохранить...</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="res/Resource.qrc">
+     <normaloff>:/Application/close.png</normaloff>:/Application/close.png</iconset>
+   </property>
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset resource="res/Resource.qrc">
+     <normaloff>:/Application/new.png</normaloff>:/Application/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>Создать...</string>
    </property>
   </action>
  </widget>
@@ -77,6 +144,8 @@
    <header>QVTKOpenGLNativeWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="res/Resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
