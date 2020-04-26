@@ -72,7 +72,8 @@
     <PostBuildEvent>
       <Command>xcopy /y /d "D:\Qt\5.14.1\msvc2015_64\bin\*.dll" "$(OutDir)"
 xcopy /s /y /d "D:\Qt\5.14.1\msvc2015_64\qml" "$(OutDir)\qml\"
-xcopy /s /y /d "D:\Qt\5.14.1\msvc2015_64\plugins" "$(OutDir)\plugins\"</Command>
+xcopy /s /y /d "D:\Qt\5.14.1\msvc2015_64\plugins" "$(OutDir)\plugins\"
+xcopy /y /d "D:\Hemodynamics\vtk\build\bin\Debug\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -91,6 +92,10 @@ xcopy /s /y /d "D:\Qt\5.14.1\msvc2015_64\plugins" "$(OutDir)\plugins\"</Command>
   <ItemGroup>
     <ClCompile Include="..\src\Application.cxx" />
     <ClCompile Include="..\src\MainWindow.cxx" />
+    <ClCompile Include="Project.cpp" />
+    <ClCompile Include="ProjectManager.cpp" />
+    <ClCompile Include="SolverConfig.cpp" />
+    <ClCompile Include="Visualisator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\src\MainWindow.h" />
@@ -99,7 +104,14 @@ xcopy /s /y /d "D:\Qt\5.14.1\msvc2015_64\plugins" "$(OutDir)\plugins\"</Command>
     <QtUic Include="..\src\MainWindow.ui" />
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="..\src\Resource.qrc" />
+    <QtRcc Include="..\src\res\Resource.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ICalculate.h" />
+    <ClInclude Include="Project.h" />
+    <ClInclude Include="ProjectManager.h" />
+    <ClInclude Include="SolverConfig.h" />
+    <ClInclude Include="Visualisator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
