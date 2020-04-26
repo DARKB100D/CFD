@@ -11,25 +11,25 @@ class Ui_MainWindow;
 
 class MainWindow : public QMainWindow
 {
-  Q_OBJECT
+	Q_OBJECT
 public:
-  // Constructor/Destructor
-  MainWindow();
-  ~MainWindow() = default;
+	// Constructor/Destructor
+	MainWindow();
+	~MainWindow() = default;
 
 public slots:
-  void slotExit();
-  void openFile();
-  void resetView();
-  void savePNG();
+	void slotExit();
+	void openFile();
+	void resetView();
+	void savePNG();
 
 public:
 	void connectObjects();
 
 private:
-  // Designer form
-  Ui_MainWindow* ui;
-  vtkSmartPointer<vtkRenderer> renderer;
+	// Designer form
+	Ui_MainWindow* ui;
+	vtkSmartPointer<vtkRenderer> renderer;
 };
 
 #endif
