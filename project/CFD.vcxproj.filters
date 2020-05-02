@@ -55,9 +55,6 @@
     <ClCompile Include="SaveAsTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SolverResult.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StartupWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -120,8 +117,5 @@
     <ClInclude Include="StartupWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

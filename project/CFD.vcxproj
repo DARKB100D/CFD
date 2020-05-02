@@ -99,7 +99,6 @@ xcopy /y /d "D:\Hemodynamics\vtk\build\bin\Debug\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="SaveAsImage.cpp" />
     <ClCompile Include="SaveAsTable.cpp" />
     <ClCompile Include="SolverConfig.cpp" />
-    <ClCompile Include="SolverResult.cpp" />
     <ClCompile Include="StartupWindow.cpp" />
     <ClCompile Include="Visualisator.cpp" />
   </ItemGroup>
@@ -127,9 +126,6 @@ xcopy /y /d "D:\Hemodynamics\vtk\build\bin\Debug\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="SolverResult.h" />
     <ClInclude Include="StartupWindow.h" />
     <ClInclude Include="Visualisator.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
