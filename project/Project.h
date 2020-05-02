@@ -11,7 +11,7 @@ class Project
 		QString name;
 		QString path;
 		SolverConfig config;
-		DefaultSolver solver;
+		ISolve * solver;
 
 	public:
 		QFile model;

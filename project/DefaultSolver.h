@@ -1,7 +1,9 @@
 #pragma once
-#include "ISolve.h";
+
+#include "ISolve.h"
 
 class DefaultSolver : public ISolve
 {
-	void solve();
+	public:
+		SolverResult solve();
 };
