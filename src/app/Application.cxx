@@ -5,7 +5,7 @@
 VTK_MODULE_INIT(vtkRenderingOpenGL2);
 VTK_MODULE_INIT(vtkInteractionStyle);
 
-#include "MainWindow.h"
+#include "..\gui\MainWindow.h"
  
 int main( int argc, char** argv )
 {
