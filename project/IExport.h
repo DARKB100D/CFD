@@ -1,8 +1,7 @@
 #pragma once
 
-class IExport
+__interface IExport
 {
 	public:
-		virtual ~IExport() {};
-		virtual void Export() = 0;
+		void Export();
 };

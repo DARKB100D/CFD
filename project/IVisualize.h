@@ -1,10 +1,10 @@
 #pragma once
-class IVisualize
+
+__interface IVisualize
 {
 	public:
-		virtual ~IVisualize() {};
-		virtual void visualizeModel() = 0;
-		virtual void visualizeMesh() = 0;
-		virtual void visualizeResult() = 0;
+		void visualizeModel();
+		void visualizeMesh();
+		void visualizeResult();
 };
 

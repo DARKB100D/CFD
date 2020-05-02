@@ -1,9 +1,11 @@
 #pragma once
 
-class ISolve
+#include "SolverResult.h"
+
+__interface ISolve
 {
 	public:
-		virtual ~ISolve() {};
-		virtual void solve() = 0;
+		SolverResult solve();
+		
 };
 
