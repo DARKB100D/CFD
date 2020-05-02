@@ -92,26 +92,44 @@ xcopy /y /d "D:\Hemodynamics\vtk\build\bin\Debug\*.dll" "$(OutDir)"</Command>
   <ItemGroup>
     <ClCompile Include="..\src\Application.cxx" />
     <ClCompile Include="..\src\MainWindow.cxx" />
+    <ClCompile Include="DefaultSolver.cpp" />
+    <ClCompile Include="Exporter.cpp" />
     <ClCompile Include="Project.cpp" />
     <ClCompile Include="ProjectManager.cpp" />
+    <ClCompile Include="SaveAsImage.cpp" />
+    <ClCompile Include="SaveAsTable.cpp" />
     <ClCompile Include="SolverConfig.cpp" />
+    <ClCompile Include="SolverResult.cpp" />
+    <ClCompile Include="StartupWindow.cpp" />
     <ClCompile Include="Visualisator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\src\MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="..\src\gui\StartupWindow.ui" />
     <QtUic Include="..\src\MainWindow.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="..\src\res\Resource.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ICalculate.h" />
+    <ClInclude Include="DefaultSolver.h" />
+    <ClInclude Include="Exporter.h" />
+    <ClInclude Include="IExport.h" />
+    <ClInclude Include="ISolve.h" />
+    <ClInclude Include="IVisualize.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="ProjectManager.h" />
+    <ClInclude Include="SaveAsImage.h" />
+    <ClInclude Include="SaveAsTable.h" />
     <ClInclude Include="SolverConfig.h" />
+    <ClInclude Include="SolverResult.h" />
+    <ClInclude Include="StartupWindow.h" />
     <ClInclude Include="Visualisator.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
