@@ -1,5 +1,11 @@
 <RCC>
   <qresource prefix="Application">
+    <file>layers.png</file>
+    <file>mesh.png</file>
+    <file>model.png</file>
+    <file>data table.png</file>
+    <file>image.png</file>
+    <file>reset.png</file>
     <file>icon 24 x 24.png</file>
     <file>close.png</file>
     <file>info.png</file>

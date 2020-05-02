@@ -22,6 +22,7 @@ public slots:
 	void openFile();
 	void resetView();
 	void savePNG();
+	void about();
 
 public:
 	void connectObjects();

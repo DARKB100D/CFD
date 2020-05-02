@@ -23,6 +23,7 @@
 #include <vtkCylinderSource.h>
 
 #include <QFileDialog>
+#include <QMessagebox>
 
 // Constructor
 MainWindow::MainWindow()
@@ -30,6 +31,7 @@ MainWindow::MainWindow()
   this->ui = new Ui_MainWindow;
   this->ui->setupUi(this);
   
+  // Set up action signals and slots
   connectObjects();
 
   vtkNew<vtkNamedColors> colors;
@@ -67,8 +69,6 @@ MainWindow::MainWindow()
   this->ui->qvtkWidget->GetRenderWindow()->SetWindowName(
       "MainWindow");
 
-  // Set up action signals and slots
-  connect(this->ui->actionExit, SIGNAL(triggered()), this, SLOT(slotExit()));
 }
 
 void MainWindow::slotExit()
@@ -77,9 +77,11 @@ void MainWindow::slotExit()
 }
 
 void MainWindow::connectObjects() {
-	connect(ui->btnOpenFile, SIGNAL(clicked()), this, SLOT(openFile()));
-	connect(ui->btnReset, SIGNAL(clicked()), this, SLOT(resetView()));
-	connect(ui->btnSave, SIGNAL(clicked()), this, SLOT(savePNG()));
+	//connect(ui->btnOpenFile, SIGNAL(clicked()), this, SLOT(openFile()));
+	connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(slotExit()));
+	connect(ui->actionReset, SIGNAL(triggered()), this, SLOT(resetView()));
+	connect(ui->actionSaveAsImage, SIGNAL(triggered()), this, SLOT(savePNG()));
+	connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
 }
 
 void MainWindow::openFile() {
@@ -113,7 +115,7 @@ void MainWindow::resetView() {
 }
 
 void MainWindow::savePNG() {
-	QString selected_file = QFileDialog::getSaveFileName(this, tr("Save screenshot"), QApplication::applicationDirPath(), "*.png");
+	QString selected_file = QFileDialog::getSaveFileName(this, tr("Сохранить картинку"), QApplication::applicationDirPath(), "*.png");
 	
 	if (selected_file.isNull()) return;
 
@@ -134,4 +136,12 @@ void MainWindow::savePNG() {
 	writer->Write();
 
 	this->renderer->GetRenderWindow()->Render();
+}
+
+void MainWindow::about()
+{
+	QMessageBox::about(this, tr("О программе"),
+		tr("<h2>Вычислительная гемодинамика</h2>"
+			"<p>Программный комплекс по расчету параметров течения крови в сосудах человека.<p>"
+			"<p>Исходный код: https://github.com/DARKB100D/CFD<p>"));
 }
