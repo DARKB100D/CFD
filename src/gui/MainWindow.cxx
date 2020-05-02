@@ -28,68 +28,91 @@
 // Constructor
 MainWindow::MainWindow()
 {
-  this->ui = new Ui_MainWindow;
-  this->ui->setupUi(this);
-  
-  // Set up action signals and slots
-  connectObjects();
+	// Load UI
+	this->ui = new Ui_MainWindow;
+	this->ui->setupUi(this);
 
-  vtkNew<vtkNamedColors> colors;
+	// Initialize VTK widget
+	initVTKWidget();
 
-  vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
-
-  this->ui->qvtkWidget->SetRenderWindow(renderWindow);
-
-  // Sphere
-  //vtkNew<vtkSphereSource> sphereSource;
-  //sphereSource->Update();
-  vtkSmartPointer<vtkCylinderSource> sphereSource = vtkSmartPointer<vtkCylinderSource>::New();
-  sphereSource->SetResolution(210);
-
-  vtkNew<vtkPolyDataMapper> sphereMapper;
-  sphereMapper->SetInputConnection(sphereSource->GetOutputPort());
-  vtkNew<vtkActor> sphereActor;
-  sphereActor->SetMapper(sphereMapper);
-  sphereActor->GetProperty()->SetColor(colors->GetColor4d("Tomato").GetData());
-
-  // VTK Renderer
-  //vtkNew<vtkRenderer> renderer;
-  renderer = vtkSmartPointer<vtkRenderer>::New();
-  renderer->AddActor(sphereActor);
-  renderer->SetBackground(colors->GetColor3d("SteelBlue").GetData());
-  // Setup the background gradient
-  renderer->GradientBackgroundOn();
-  renderer->SetBackground(1, 1, 1);
-  renderer->SetBackground2(0.42578125, 0.59765625, 0.9453125);
-
-  
-  // VTK/Qt wedded
-
-  this->ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
-  this->ui->qvtkWidget->GetRenderWindow()->SetWindowName(
-      "MainWindow");
-
-}
-
-void MainWindow::slotExit()
-{
-  qApp->exit();
+	// Set up action signals and slots
+	connectObjects();
 }
 
 void MainWindow::connectObjects() {
-	//connect(ui->btnOpenFile, SIGNAL(clicked()), this, SLOT(openFile()));
-	connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(slotExit()));
-	connect(ui->actionReset, SIGNAL(triggered()), this, SLOT(resetView()));
-	connect(ui->actionSaveAsImage, SIGNAL(triggered()), this, SLOT(savePNG()));
+	connect(ui->actionNew, SIGNAL(triggered()), this, SLOT(createProject()));
+	connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(openProject()));
+	connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(saveProject()));
+	
+	connect(ui->actionAddModel, SIGNAL(triggered()), this, SLOT(loadModel()));
+	connect(ui->actionAddMesh, SIGNAL(triggered()), this, SLOT(loadMesh()));
+
+	connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(appExit()));
+	
+	connect(ui->actionReset, SIGNAL(triggered()), this, SLOT(normalizeSize()));
+
+	connect(ui->actionViewModel, SIGNAL(triggered()), this, SLOT(viewModel()));
+	connect(ui->actionViewMesh, SIGNAL(triggered()), this, SLOT(viewMesh()));
+	connect(ui->actionViewResult, SIGNAL(triggered()), this, SLOT(viewResult()));
+		
+	connect(ui->actionSaveAsImage, SIGNAL(triggered()), this, SLOT(saveAsPNG()));
+	connect(ui->actionSaveAsTable, SIGNAL(triggered()), this, SLOT(saveAsDataTable()));
+
 	connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
 }
 
-void MainWindow::openFile() {
+void MainWindow::initVTKWidget() {
+	vtkNew<vtkNamedColors> colors;
+	
+	vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
+	this->ui->qvtkWidget->SetRenderWindow(renderWindow);
+
+	// VTK Renderer
+	renderer = vtkSmartPointer<vtkRenderer>::New();
+	renderer->SetBackground(colors->GetColor3d("SteelBlue").GetData());
+	// Setup the background gradient
+	renderer->GradientBackgroundOn();
+	renderer->SetBackground(1, 1, 1);
+	renderer->SetBackground2(0.42578125, 0.59765625, 0.9453125);
+
+	// VTK/Qt wedded
+	this->ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
+	this->ui->qvtkWidget->GetRenderWindow()->SetWindowName("MainWindow");
+
+
+
+	// Sphere (DEMO)
+	//vtkSmartPointer<vtkCylinderSource> sphereSource = vtkSmartPointer<vtkCylinderSource>::New();
+	//sphereSource->SetResolution(210);
+
+	//vtkNew<vtkPolyDataMapper> sphereMapper;
+	//sphereMapper->SetInputConnection(sphereSource->GetOutputPort());
+	//vtkNew<vtkActor> sphereActor;
+	//sphereActor->SetMapper(sphereMapper);
+	//sphereActor->GetProperty()->SetColor(colors->GetColor4d("Tomato").GetData());
+
+	//renderer->AddActor(sphereActor);
+}
+
+void MainWindow::createProject()
+{
+}
+
+void MainWindow::openProject()
+{
+}
+
+void MainWindow::saveProject()
+{
+
+}
+
+void MainWindow::loadModel() {
 	// open a file dialog
 	auto selected_file = QFileDialog::getOpenFileName(this, tr("Open a file"), QApplication::applicationDirPath());
 
 	if (selected_file.isNull()) return;
-	
+
 	vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
 	std::string inputFilename = selected_file.toLocal8Bit();
 	reader->SetFileName(inputFilename.c_str());
@@ -104,19 +127,43 @@ void MainWindow::openFile() {
 
 	this->renderer->RemoveAllViewProps();
 	this->renderer->AddActor(actor);
-	this->resetView();
+	this->normalizeSize();
 }
 
-void MainWindow::resetView() {
-	//vtkNew<vtkNamedColors> colors;
-	//this->sphereActor->GetProperty()->SetColor(colors->GetColor4d("Green").GetData());
+void MainWindow::loadMesh()
+{
+}
+
+void MainWindow::appExit()
+{
+	qApp->exit();
+}
+
+void MainWindow::normalizeSize() {
 	this->renderer->ResetCamera();
 	this->renderer->GetRenderWindow()->Render();
 }
 
-void MainWindow::savePNG() {
+void MainWindow::viewModel()
+{
+	if (ui->actionViewModel->isChecked()) {
+
+	} else {
+
+	}
+}
+
+void MainWindow::viewMesh()
+{
+}
+
+void MainWindow::viewResult()
+{
+}
+
+void MainWindow::saveAsPNG() {
 	QString selected_file = QFileDialog::getSaveFileName(this, tr("Сохранить картинку"), QApplication::applicationDirPath(), "*.png");
-	
+
 	if (selected_file.isNull()) return;
 
 	// Screenshot  
@@ -136,6 +183,10 @@ void MainWindow::savePNG() {
 	writer->Write();
 
 	this->renderer->GetRenderWindow()->Render();
+}
+
+void MainWindow::saveAsDataTable()
+{
 }
 
 void MainWindow::about()

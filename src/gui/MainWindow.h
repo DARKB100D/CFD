@@ -1,5 +1,4 @@
-#ifndef MainWindow_H
-#define MainWindow_H
+#pragma once
 
 #include <vtkSmartPointer.h>
 #include <vtkActor.h>
@@ -18,19 +17,33 @@ public:
 	~MainWindow() = default;
 
 public slots:
-	void slotExit();
-	void openFile();
-	void resetView();
-	void savePNG();
-	void about();
+	// file menu
+	void createProject();
+	void openProject();
+	void saveProject();
+	void loadModel();
+	void loadMesh();
+	void appExit();
 
-public:
-	void connectObjects();
+	// edit menu
+	void normalizeSize();
+
+	// view menu
+	void viewModel();
+	void viewMesh();
+	void viewResult();
+
+	// tools menu
+	void saveAsPNG();
+	void saveAsDataTable();
+
+	// help menu
+	void about();
 
 private:
 	// Designer form
 	Ui_MainWindow* ui;
 	vtkSmartPointer<vtkRenderer> renderer;
+	void initVTKWidget();
+	void connectObjects();
 };
-
-#endif
