@@ -136,7 +136,7 @@ void MainWindow::loadMesh()
 
 void MainWindow::appExit()
 {
-	qApp->exit();
+	qApp->quit();
 }
 
 void MainWindow::normalizeSize() {
