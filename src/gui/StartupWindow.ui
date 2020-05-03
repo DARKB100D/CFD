@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>StartupWindow</class>
+ <widget class="QMainWindow" name="StartupWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -34,7 +34,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="CreateProject">
+       <widget class="QPushButton" name="btnCreateProject">
         <property name="font">
          <font>
           <pointsize>10</pointsize>
@@ -50,7 +50,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="OpenProject">
+       <widget class="QPushButton" name="btnOpenProject">
         <property name="font">
          <font>
           <pointsize>10</pointsize>
@@ -68,7 +68,13 @@
      </layout>
     </item>
     <item>
-     <widget class="QListView" name="ProjectsListView"/>
+     <widget class="QListWidget" name="ProjectsListWidget">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
