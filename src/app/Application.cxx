@@ -5,7 +5,7 @@
 VTK_MODULE_INIT(vtkRenderingOpenGL2);
 VTK_MODULE_INIT(vtkInteractionStyle);
 
-#include "..\gui\MainWindow.h"
+#include "..\gui\startupWindow.h"
  
 int main( int argc, char** argv )
 {
@@ -15,7 +15,7 @@ int main( int argc, char** argv )
   // QT Stuff
   QApplication app( argc, argv );
  
-  MainWindow MainWindow;
+  StartupWindow MainWindow;
   MainWindow.show();
  
   return app.exec();
