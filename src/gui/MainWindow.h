@@ -1,9 +1,7 @@
 #pragma once
 
-#include <vtkSmartPointer.h>
-#include <vtkActor.h>
-
 #include <QMainWindow>
+#include "../app/Visualizator.h"
 
 // Forward Qt class declarations
 class Ui_MainWindow;
@@ -14,6 +12,7 @@ class MainWindow : public QMainWindow
 public:
 	// Constructor/Destructor
 	MainWindow();
+	MainWindow(QString projectPath);
 	~MainWindow() = default;
 
 public slots:
@@ -41,9 +40,7 @@ public slots:
 	void about();
 
 private:
-	// Designer form
-	Ui_MainWindow* ui;
-	vtkSmartPointer<vtkRenderer> renderer;
-	void initVTKWidget();
+	Ui_MainWindow * ui;
+	Visualizator * visualizator;
 	void connectObjects();
 };

@@ -4,28 +4,9 @@
 // MainWindow.h
 #include "ui_MainWindow.h"
 
-#include <vtkGenericOpenGLRenderWindow.h>
-#include <vtkNamedColors.h>
-#include <vtkNew.h>
-#include <vtkPolyDataMapper.h>
-#include <vtkProperty.h>
-#include <vtkRenderWindow.h>
-#include <vtkRenderer.h>
-#include <vtkSphereSource.h>
-#include <vtkVersion.h>
-
-#include <vtkPolyData.h>
-#include <vtkSTLReader.h>
-
-#include <vtkWindowToImageFilter.h>
-#include <vtkPNGWriter.h>
-
-#include <vtkCylinderSource.h>
-
 #include <QFileDialog>
 #include <QMessagebox>
 
-// Constructor
 MainWindow::MainWindow()
 {
 	// Load UI
@@ -33,7 +14,7 @@ MainWindow::MainWindow()
 	this->ui->setupUi(this);
 
 	// Initialize VTK widget
-	initVTKWidget();
+	this->visualizator = new Visualizator(ui);
 
 	// Set up action signals and slots
 	connectObjects();
@@ -61,45 +42,14 @@ void MainWindow::connectObjects() {
 	connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
 }
 
-void MainWindow::initVTKWidget() {
-	vtkNew<vtkNamedColors> colors;
-	
-	vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
-	this->ui->qvtkWidget->SetRenderWindow(renderWindow);
-
-	// VTK Renderer
-	renderer = vtkSmartPointer<vtkRenderer>::New();
-	renderer->SetBackground(colors->GetColor3d("SteelBlue").GetData());
-	// Setup the background gradient
-	renderer->GradientBackgroundOn();
-	renderer->SetBackground(1, 1, 1);
-	renderer->SetBackground2(0.42578125, 0.59765625, 0.9453125);
-
-	// VTK/Qt wedded
-	this->ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
-	this->ui->qvtkWidget->GetRenderWindow()->SetWindowName("MainWindow");
-
-
-
-	// Sphere (DEMO)
-	//vtkSmartPointer<vtkCylinderSource> sphereSource = vtkSmartPointer<vtkCylinderSource>::New();
-	//sphereSource->SetResolution(210);
-
-	//vtkNew<vtkPolyDataMapper> sphereMapper;
-	//sphereMapper->SetInputConnection(sphereSource->GetOutputPort());
-	//vtkNew<vtkActor> sphereActor;
-	//sphereActor->SetMapper(sphereMapper);
-	//sphereActor->GetProperty()->SetColor(colors->GetColor4d("Tomato").GetData());
-
-	//renderer->AddActor(sphereActor);
-}
-
 void MainWindow::createProject()
 {
+
 }
 
 void MainWindow::openProject()
 {
+
 }
 
 void MainWindow::saveProject()
@@ -109,29 +59,18 @@ void MainWindow::saveProject()
 
 void MainWindow::loadModel() {
 	// open a file dialog
-	auto selected_file = QFileDialog::getOpenFileName(this, tr("Open a file"), QApplication::applicationDirPath());
+	auto selected_file = QFileDialog::getOpenFileName(this, tr("Выберите файл модели"), QApplication::applicationDirPath());
 
 	if (selected_file.isNull()) return;
 
-	vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
 	std::string inputFilename = selected_file.toLocal8Bit();
-	reader->SetFileName(inputFilename.c_str());
-	reader->Update();
 
-	// Visualize
-	vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-	mapper->SetInputConnection(reader->GetOutputPort());
-
-	vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
-	actor->SetMapper(mapper);
-
-	this->renderer->RemoveAllViewProps();
-	this->renderer->AddActor(actor);
-	this->normalizeSize();
+	visualizator->visualizeModel(inputFilename);
 }
 
 void MainWindow::loadMesh()
 {
+
 }
 
 void MainWindow::appExit()
@@ -140,8 +79,7 @@ void MainWindow::appExit()
 }
 
 void MainWindow::normalizeSize() {
-	this->renderer->ResetCamera();
-	this->renderer->GetRenderWindow()->Render();
+	this->visualizator->normalizeSize();
 }
 
 void MainWindow::viewModel()
@@ -155,10 +93,12 @@ void MainWindow::viewModel()
 
 void MainWindow::viewMesh()
 {
+
 }
 
 void MainWindow::viewResult()
 {
+
 }
 
 void MainWindow::saveAsPNG() {
@@ -166,27 +106,12 @@ void MainWindow::saveAsPNG() {
 
 	if (selected_file.isNull()) return;
 
-	// Screenshot  
-	vtkSmartPointer<vtkWindowToImageFilter> windowToImageFilter =
-		vtkSmartPointer<vtkWindowToImageFilter>::New();
-	windowToImageFilter->SetInput(this->renderer->GetRenderWindow());
-	windowToImageFilter->SetScale(2); // image quality
-	windowToImageFilter->SetInputBufferTypeToRGBA(); //also record the alpha (transparency) channel
-	windowToImageFilter->ReadFrontBufferOff(); // read from the back buffer
-	windowToImageFilter->Update();
-
-	vtkSmartPointer<vtkPNGWriter> writer =
-		vtkSmartPointer<vtkPNGWriter>::New();
-	std::cout << selected_file.toStdString() << std::endl;
-	writer->SetFileName(selected_file.toStdString().c_str());
-	writer->SetInputConnection(windowToImageFilter->GetOutputPort());
-	writer->Write();
-
-	this->renderer->GetRenderWindow()->Render();
+	this->visualizator->saveScreenshot(selected_file.toStdString());
 }
 
 void MainWindow::saveAsDataTable()
 {
+
 }
 
 void MainWindow::about()
