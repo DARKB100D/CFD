@@ -18,6 +18,11 @@ StartupWindow::StartupWindow() {
 	fillProjectHistory();
 }
 
+StartupWindow::~StartupWindow()
+{
+	delete ui;
+}
+
 void StartupWindow::btnCreateProject_Click()
 {
 	this->hide();
@@ -27,7 +32,13 @@ void StartupWindow::btnCreateProject_Click()
 
 void StartupWindow::btnOpenProject_Click()
 {
+	this->hide();
+	
+	QString selected_path = QFileDialog::getExistingDirectory(this, tr("Укажите место расположения проекта"), QApplication::applicationDirPath(), QFileDialog::ShowDirsOnly);
+	if (selected_path.isNull()) return;
 
+	MainWindow * window = new MainWindow(selected_path);
+	window->show();
 }
 
 void StartupWindow::projectList_Click()

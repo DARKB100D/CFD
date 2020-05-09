@@ -14,10 +14,38 @@ MainWindow::MainWindow()
 	this->ui->setupUi(this);
 
 	// Initialize VTK widget
-	this->visualizator = new Visualizator(ui);
+	this->visualizer = new Visualizer(ui);
 
 	// Set up action signals and slots
 	connectObjects();
+
+	this->project = new Project();
+}
+
+MainWindow::MainWindow(QString _path) //: MainWindow()
+{
+
+	// Load UI
+	this->ui = new Ui_MainWindow;
+	this->ui->setupUi(this);
+
+	// Initialize VTK widget
+	this->visualizer = new Visualizer(ui);
+
+	// Set up action signals and slots
+	connectObjects(); 
+	
+	this->project = new Project(_path);
+
+	this->visualizer->loadModel(this->project->model);
+}
+
+MainWindow::~MainWindow()
+{
+	delete ui;
+	delete visualizer;
+	delete project;
+	delete solver;
 }
 
 void MainWindow::connectObjects() {
@@ -25,8 +53,8 @@ void MainWindow::connectObjects() {
 	connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(openProject()));
 	connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(saveProject()));
 	
-	connect(ui->actionAddModel, SIGNAL(triggered()), this, SLOT(loadModel()));
-	connect(ui->actionAddMesh, SIGNAL(triggered()), this, SLOT(loadMesh()));
+	connect(ui->actionAddModel, SIGNAL(triggered()), this, SLOT(addModel()));
+	connect(ui->actionAddMesh, SIGNAL(triggered()), this, SLOT(addMesh()));
 
 	connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(appExit()));
 	
@@ -44,32 +72,49 @@ void MainWindow::connectObjects() {
 
 void MainWindow::createProject()
 {
-
+	MainWindow * window = new MainWindow();
+	window->show();
 }
 
 void MainWindow::openProject()
 {
+	QString selected_path = QFileDialog::getExistingDirectory(this, tr("Укажите место расположения проекта"), QApplication::applicationDirPath(), QFileDialog::ShowDirsOnly);
+	
+	if (selected_path.isNull()) return;
+
+	MainWindow * window = new MainWindow(selected_path);
+
+	window->show();
 
 }
 
 void MainWindow::saveProject()
 {
-
+	while (!this->project->Save())
+	{
+		QString selected_path = QFileDialog::getExistingDirectory(this, tr("Укажите место расположения проекта"), QApplication::applicationDirPath(), QFileDialog::ShowDirsOnly);
+		if (selected_path.isNull()) return;
+		this->project->SetPath(selected_path);
+	}
 }
 
-void MainWindow::loadModel() {
-	// open a file dialog
-	auto selected_file = QFileDialog::getOpenFileName(this, tr("Выберите файл модели"), QApplication::applicationDirPath());
+void MainWindow::addModel() {
+	QString selected_file = QFileDialog::getOpenFileName(this, tr("Выберите файл модели"), QApplication::applicationDirPath());
 
 	if (selected_file.isNull()) return;
 
-	std::string inputFilename = selected_file.toLocal8Bit();
+	project->model = selected_file;
 
-	visualizator->visualizeModel(inputFilename);
+	visualizer->loadModel(selected_file);
 }
 
-void MainWindow::loadMesh()
+void MainWindow::addMesh()
 {
+	QString selected_file = QFileDialog::getOpenFileName(this, tr("Выберите файл расчетной сетки"), QApplication::applicationDirPath());
+
+	if (selected_file.isNull()) return;
+
+	project->mesh = selected_file;
 
 }
 
@@ -79,26 +124,22 @@ void MainWindow::appExit()
 }
 
 void MainWindow::normalizeSize() {
-	this->visualizator->normalizeSize();
+	this->visualizer->normalizeSize();
 }
 
 void MainWindow::viewModel()
 {
-	if (ui->actionViewModel->isChecked()) {
-
-	} else {
-
-	}
+	this->visualizer->setShowModel(this->ui->actionViewModel->isChecked());
 }
 
 void MainWindow::viewMesh()
 {
-
+	this->visualizer->setShowMesh(this->ui->actionViewMesh->isChecked());
 }
 
 void MainWindow::viewResult()
 {
-
+	this->visualizer->setShowResult(this->ui->actionViewResult->isChecked());
 }
 
 void MainWindow::saveAsPNG() {
@@ -106,7 +147,7 @@ void MainWindow::saveAsPNG() {
 
 	if (selected_file.isNull()) return;
 
-	this->visualizator->saveScreenshot(selected_file.toStdString());
+	this->visualizer->saveScreenshot(selected_file);
 }
 
 void MainWindow::saveAsDataTable()

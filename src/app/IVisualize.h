@@ -1,14 +1,17 @@
 #pragma once
 
-#include <string>
+#include <QString>
 
 __interface IVisualize
 {
 	public:
-		void visualizeModel(std::string inputFilename);
-		void visualizeMesh();
-		void visualizeResult();
+		void loadModel(QString inputFilename);
+		void loadMesh(QString inputFilename);
+		void loadResult(QString inputFilename);
+		void setShowModel(bool _show);
+		void setShowMesh(bool _show);
+		void setShowResult(bool _show);
 		void normalizeSize();
-		void saveScreenshot(std::string selectedFilename);
+		void saveScreenshot(QString selectedFilename);
 };
 

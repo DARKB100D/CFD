@@ -1,7 +1,9 @@
 #pragma once
 
 #include <QMainWindow>
-#include "../app/Visualizator.h"
+#include "../app/Visualizer.h"
+#include "../app/Project.h"
+#include <qstring.h>
 
 // Forward Qt class declarations
 class Ui_MainWindow;
@@ -13,15 +15,15 @@ public:
 	// Constructor/Destructor
 	MainWindow();
 	MainWindow(QString projectPath);
-	~MainWindow() = default;
+	~MainWindow();
 
 public slots:
 	// file menu
 	void createProject();
 	void openProject();
 	void saveProject();
-	void loadModel();
-	void loadMesh();
+	void addModel();
+	void addMesh();
 	void appExit();
 
 	// edit menu
@@ -41,6 +43,8 @@ public slots:
 
 private:
 	Ui_MainWindow * ui;
-	Visualizator * visualizator;
+	Visualizer * visualizer;
+	Project * project;
+	ISolve * solver;
 	void connectObjects();
 };

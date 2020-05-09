@@ -9,7 +9,7 @@ class StartupWindow : public QMainWindow
 {
 public:
 	StartupWindow();
-	~StartupWindow() = default;
+	~StartupWindow();
 
 private:
 	Q_OBJECT
