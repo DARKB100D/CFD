@@ -6,4 +6,5 @@ class DefaultSolver : public ISolve
 {
 	public:
 		SolverResult solve();
+		void loadConfig();
 };
