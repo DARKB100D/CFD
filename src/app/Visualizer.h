@@ -25,6 +25,4 @@ private:
 	bool showMesh;
 	bool showResult;
 	void update();
-
 };
-

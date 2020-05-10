@@ -43,10 +43,16 @@ bool Project::Save()
 
 void Project::LoadConfig()
 {
+	// load model
 	QString modelFilePath = path + QString("//model.stl");
 	QFile * modelfile = new QFile(modelFilePath);
 	if (modelfile->exists()) model = modelFilePath;
-	
+
+	// load mesh
+	QString meshFilePath = path + QString("//mesh.off");
+	QFile * meshfile = new QFile(meshFilePath);
+	if (meshfile->exists()) mesh = meshFilePath;
+
 	/*QSettings cfg = 
 	this->name*/
 }

@@ -116,6 +116,8 @@ void MainWindow::addMesh()
 
 	project->mesh = selected_file;
 
+	visualizer->loadMesh(selected_file);
+
 }
 
 void MainWindow::appExit()

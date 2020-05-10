@@ -92,6 +92,7 @@ xcopy /y /d "D:\Hemodynamics\vtk\build\bin\Debug\*.dll" "$(OutDir)"</Command>
   <ItemGroup>
     <ClCompile Include="..\src\app\Application.cxx" />
     <ClCompile Include="..\src\app\Converter.cpp" />
+    <ClCompile Include="..\src\app\vtkOFFReader.cxx" />
     <ClCompile Include="..\src\gui\MainWindow.cxx" />
     <ClCompile Include="..\src\app\DefaultSolver.cpp" />
     <ClCompile Include="..\src\app\Project.cpp" />
@@ -119,6 +120,7 @@ xcopy /y /d "D:\Hemodynamics\vtk\build\bin\Debug\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="..\src\app\SolverConfig.h" />
     <ClInclude Include="..\src\app\SolverResult.h" />
     <ClInclude Include="..\src\app\Visualizer.h" />
+    <ClInclude Include="..\src\app\vtkOFFReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
