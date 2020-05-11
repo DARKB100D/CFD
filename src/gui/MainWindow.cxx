@@ -24,7 +24,6 @@ MainWindow::MainWindow()
 
 MainWindow::MainWindow(QString _path) //: MainWindow()
 {
-
 	// Load UI
 	this->ui = new Ui_MainWindow;
 	this->ui->setupUi(this);
@@ -35,9 +34,13 @@ MainWindow::MainWindow(QString _path) //: MainWindow()
 	// Set up action signals and slots
 	connectObjects(); 
 	
+	// Open project
 	this->project = new Project(_path);
 
+	// Visualize project data
 	this->visualizer->loadModel(this->project->model);
+	this->visualizer->loadMesh(this->project->mesh);
+	this->visualizer->loadResult(this->project->result);
 }
 
 MainWindow::~MainWindow()
@@ -103,9 +106,9 @@ void MainWindow::addModel() {
 
 	if (selected_file.isNull()) return;
 
-	project->model = selected_file;
+	Converter::geometryFile_ToVtkPolyData(selected_file, project->model);
 
-	visualizer->loadModel(selected_file);
+	visualizer->loadModel(project->model);
 }
 
 void MainWindow::addMesh()
@@ -114,10 +117,9 @@ void MainWindow::addMesh()
 
 	if (selected_file.isNull()) return;
 
-	project->mesh = selected_file;
+	Converter::geometryFile_ToVtkPolyData(selected_file, project->mesh);
 
-	visualizer->loadMesh(selected_file);
-
+	visualizer->loadMesh(project->mesh);
 }
 
 void MainWindow::appExit()

@@ -35,28 +35,9 @@ Visualizer::~Visualizer()
 }
 
 
-void Visualizer::loadModel(QString inputFilename) {
-
+void Visualizer::loadModel(vtkPolyData * data) {
 	vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-
-	QFileInfo fileinfo(inputFilename); // Определяем путь к файлу
-	QString suffix = fileinfo.suffix(); // возвращаем расширение файла, которое состоит из всех символов в файле после последнего символа точки (но не включая её)
-
-	if (suffix == "stl") {
-		vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
-		reader->SetFileName(inputFilename.toLocal8Bit());
-		reader->Update();
-
-		mapper->SetInputConnection(reader->GetOutputPort());
-	} else if (suffix == "off") {
-		vtkSmartPointer<vtkOFFReader> reader = vtkSmartPointer<vtkOFFReader>::New();
-		reader->SetFileName(inputFilename.toLocal8Bit());
-		reader->Update();
-
-		mapper->SetInputConnection(reader->GetOutputPort());
-	} else {
-		return;
-	}
+	mapper->SetInputData(data);
 
 	vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
 	actor->SetMapper(mapper);
@@ -66,12 +47,12 @@ void Visualizer::loadModel(QString inputFilename) {
 	this->normalizeSize();
 }
 
-void Visualizer::loadMesh(QString inputFilename) {
-	
+void Visualizer::loadMesh(vtkPolyData * data)
+{
 }
 
-void Visualizer::loadResult(QString inputFilename) {
-	   	  
+void Visualizer::loadResult(vtkPolyData * data)
+{
 }
 
 void Visualizer::setShowModel(bool _show)

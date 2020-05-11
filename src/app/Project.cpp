@@ -4,6 +4,9 @@ Project::Project()
 {
 	this->name = new QString("Новый");
 	this->path = new QString("");
+	this->model = vtkSmartPointer<vtkPolyData>::New();
+	this->mesh = vtkSmartPointer<vtkPolyData>::New();
+	this->result = vtkSmartPointer<vtkPolyData>::New();
 }
 
 Project::Project(QString _path)
@@ -17,6 +20,7 @@ Project::~Project()
 	delete path;
 	delete name;
 	delete config;
+
 }
 
 void Project::SetConfig(QSettings * _cfg)
@@ -32,26 +36,29 @@ bool Project::Save()
 	QDir dir(*path);
 	if (!dir.exists()) dir.mkpath(".");
 
-	// write msh, stl, res files
-	QFile::copy(model, *path + QString("//model.stl"));
-	QFile::copy(mesh, *path + QString("//mesh.off"));
+	// write vtkPolyData files
+	Converter::vtkPolyData_ToVTKFile(*path + QString("//model.vtp"), model);
 
-	// write cfg file
+	
+	// write project config file
 	
 	return true;
 }
 
 void Project::LoadConfig()
 {
-	// load model
-	QString modelFilePath = path + QString("//model.stl");
-	QFile * modelfile = new QFile(modelFilePath);
-	if (modelfile->exists()) model = modelFilePath;
-
+// load model
+	this->model = vtkSmartPointer<vtkPolyData>::New();
+	Converter::geometryFile_ToVtkPolyData(path + QString("//model.vtp"), model);
+	
 	// load mesh
-	QString meshFilePath = path + QString("//mesh.off");
-	QFile * meshfile = new QFile(meshFilePath);
-	if (meshfile->exists()) mesh = meshFilePath;
+	this->mesh = vtkSmartPointer<vtkPolyData>::New();
+	Converter::geometryFile_ToVtkPolyData(path + QString("//mesh.vtp"), mesh);
+
+	// load result
+	this->result = vtkSmartPointer<vtkPolyData>::New();
+
+	// load project configuration
 
 	/*QSettings cfg = 
 	this->name*/

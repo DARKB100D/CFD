@@ -7,6 +7,9 @@
 #include "qsettings.h"
 #include "DefaultSolver.h"
 #include "SolverConfig.h"
+#include <vtkPolyData.h>
+#include "Converter.h"
+
 
 class Project
 {
@@ -21,9 +24,9 @@ class Project
 		Project(QString _path);
 		~Project();
 
-		QString model;
-		QString mesh;
-		QString result;
+		vtkSmartPointer<vtkPolyData> model;
+		vtkSmartPointer<vtkPolyData> mesh;
+		vtkSmartPointer<vtkPolyData> result;
 
 		void SetName(QString * _name);
 		const QString * GetName();
