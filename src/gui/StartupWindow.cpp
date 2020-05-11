@@ -41,25 +41,35 @@ void StartupWindow::btnOpenProject_Click()
 	window->show();
 }
 
-void StartupWindow::projectList_Click()
+void StartupWindow::projectList_Click(QListWidgetItem *item)
 {
+	this->hide();
 
+	QVariant data = item->data(Qt::UserRole);
+	QString path = data.toString();
+
+	MainWindow * window = new MainWindow(path);
+	window->show();
 }
 
 void StartupWindow::connectObjects()
 {
 	connect(ui->btnCreateProject, SIGNAL(clicked()), this, SLOT(btnCreateProject_Click()));
 	connect(ui->btnOpenProject, SIGNAL(clicked()), this, SLOT(btnOpenProject_Click()));
-	connect(ui->ProjectsListWidget, SIGNAL(doubleclicked()), this, SLOT(ProjectList_Click()));
+	connect(ui->ProjectsListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(projectList_Click(QListWidgetItem*)));
 }
 
 void StartupWindow::fillProjectHistory()
 {
-	QListWidgetItem * item = new QListWidgetItem("Test project (D:\\Hemodynamics\\CFD\\testproject)");
-	ui->ProjectsListWidget->addItem(item);
-}
+	// load recent projects list
 
-void StartupWindow::openProject()
-{
-}
+	// add items
+	QString path = "D:\\Hemodynamics\\TST";
+	QString name = "Test project";
+	QVariant fullFilePathData(path);
 
+	QListWidgetItem * newItem = new QListWidgetItem;
+	newItem->setData(Qt::UserRole, fullFilePathData);
+	newItem->setText(name + " (" + path + ")");
+	ui->ProjectsListWidget->addItem(newItem);
+}

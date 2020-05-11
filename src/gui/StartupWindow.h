@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include <qlistwidget.h>
 
 // Forward Qt class declarations
 class Ui_StartupWindow;
@@ -16,11 +17,10 @@ private:
 	Ui_StartupWindow * ui;
 	void connectObjects();
 	void fillProjectHistory();
-	void openProject();
 
 public slots:
 	void btnCreateProject_Click();
 	void btnOpenProject_Click();
-	void projectList_Click();
+	void projectList_Click(QListWidgetItem *item);
 };
 
