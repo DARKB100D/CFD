@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../res/Resource.qrc">
-    <normaloff>:/Application/icon 24 x 24.png</normaloff>:/Application/icon 24 x 24.png</iconset>
+    <normaloff>:/Application/icon.png</normaloff>:/Application/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
