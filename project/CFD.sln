@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1082
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CFD", "CFD.vcxproj", "{F01354B2-F717-4C8F-A653-5CA05D41F752}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "setup", "setup\setup.vdproj", "{410DF8B7-985C-431A-8115-7FE00AC2D701}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,13 @@ Global
 		{F01354B2-F717-4C8F-A653-5CA05D41F752}.Debug|x64.Build.0 = Debug|x64
 		{F01354B2-F717-4C8F-A653-5CA05D41F752}.Release|x64.ActiveCfg = Release|x64
 		{F01354B2-F717-4C8F-A653-5CA05D41F752}.Release|x64.Build.0 = Release|x64
+		{410DF8B7-985C-431A-8115-7FE00AC2D701}.Debug|x64.ActiveCfg = Debug
+		{410DF8B7-985C-431A-8115-7FE00AC2D701}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D788FCB-0E84-49AF-B8EF-9B9A76BC14EE}
 	EndGlobalSection
 EndGlobal
