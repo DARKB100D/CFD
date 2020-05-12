@@ -5,11 +5,12 @@ void Converter::geometryFile_ToVtkPolyData(QString inputFileName, vtkPolyData * 
 	QFile modelfile(inputFileName);
 	if (!modelfile.exists()) return;
 	
-	QFileInfo fileinfo(inputFileName); // Определяем путь к файлу
-	QString suffix = fileinfo.suffix(); // возвращаем расширение файла, которое состоит из всех символов в файле после последнего символа точки (но не включая её)
+	QFileInfo fileinfo(inputFileName); 
+	QString suffix = fileinfo.suffix(); // Returns the suffix (extension) of the file. The suffix consists of all characters in the file after(but not including) the last '.'.
 
 	if (suffix == "stl") {
 		vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
+		reader->MergingOn(); // from example
 		reader->SetFileName(inputFileName.toLocal8Bit());
 		reader->Update();
 		
@@ -22,6 +23,20 @@ void Converter::geometryFile_ToVtkPolyData(QString inputFileName, vtkPolyData * 
 		
 		data->DeepCopy(reader->GetOutput());
 	}
+	else if (suffix == "vtk") {
+		vtkSmartPointer<vtkPolyDataReader> reader = vtkSmartPointer<vtkPolyDataReader>::New();
+		reader->SetFileName(inputFileName.toLocal8Bit());
+		reader->Update();
+
+		data->DeepCopy(reader->GetOutput());
+	}
+	//else if (suffix == "tec") {
+	//	vtkSmartPointer<vtkTecplotReader> reader = vtkSmartPointer<vtkTecplotReader>::New();
+	//	reader->SetFileName(inputFileName.toLocal8Bit());
+	//	reader->Update();
+
+	//	data->DeepCopy(reader->GetOutput()); // vtkMultiBlockDataSet
+	//}
 	else if (suffix == "vtp") {
 		vtkSmartPointer<vtkXMLPolyDataReader> reader = vtkSmartPointer<vtkXMLPolyDataReader>::New();
 		reader->SetFileName(inputFileName.toLocal8Bit());
@@ -29,22 +44,13 @@ void Converter::geometryFile_ToVtkPolyData(QString inputFileName, vtkPolyData * 
 
 		data->DeepCopy(reader->GetOutput());
 	}
+	//else if (suffix == "vtu") {
+	//	vtkSmartPointer<vtkXMLUnstructuredGridReader> reader = vtkSmartPointer<vtkXMLUnstructuredGridReader>::New();
+	//	reader->SetFileName(inputFileName.toLocal8Bit());
+	//	reader->Update();
 
-	//if fileType == '':
-	//raise RuntimeError('The file does not have an extension')
-	//	if fileType == 'stl' :
-	//		reader = vtk.vtkSTLReader()
-	//		reader.MergingOn()
-	//		elif fileType == 'vtk' :
-	//		reader = vtk.vtkPolyDataReader()
-	//		elif fileType == 'tec' :
-	//		reader = vtk.vtkTecplotReader()
-	//		elif fileType == 'vtp' :
-	//		reader = vtk.vtkXMLPolyDataReader()
-	//		elif fileType == 'vtu' :
-	//		reader = vtk.vtkXMLUnstructuredGridReader()
-	//	else:
-	//raise RuntimeError('Unknown file type %s' % fileType)
+	//	data->DeepCopy(reader->GetOutput()); // vtkUnstructuredGrid
+	//}
 }
 
 void Converter::vtkPolyData_ToVTKFile(QString path, vtkPolyData * data)

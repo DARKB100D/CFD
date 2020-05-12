@@ -7,6 +7,10 @@
 #include <vtkSTLReader.h>
 #include "vtkOFFReader.h"
 #include <vtkXMLPolyDataReader.h>
+#include <vtkPolyDataReader.h>
+#include <vtkTecplotReader.h>
+#include <vtkXMLUnstructuredGridReader.h>
+
 #include <vtkXMLPolyDataWriter.h>
 
 class Converter
