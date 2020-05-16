@@ -38,7 +38,7 @@ bool Project::Save()
 
 	// write vtkPolyData files
 	Converter::vtkPolyData_ToVtkXMLFile(*path + QString("//model.vtp"), model);
-	Converter::vtkUnstructuredGrid_ToVTKXMLFile(*path + QString("//model.vtu"), mesh);
+	Converter::vtkUnstructuredGrid_ToVTKXMLFile(*path + QString("//mesh.vtu"), mesh);
 
 	
 	// write project config file

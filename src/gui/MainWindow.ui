@@ -20,7 +20,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QVTKOpenGLNativeWidget" name="qvtkWidget" native="true"/>
+     <widget class="QVTKOpenGLStereoWidget" name="qvtkWidget" native="true"/>
     </item>
    </layout>
   </widget>
