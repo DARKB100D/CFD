@@ -8,6 +8,7 @@
 #include "DefaultSolver.h"
 #include "SolverConfig.h"
 #include <vtkPolyData.h>
+#include <vtkUnstructuredGrid.h>
 #include "Converter.h"
 
 
@@ -25,7 +26,7 @@ class Project
 		~Project();
 
 		vtkSmartPointer<vtkPolyData> model;
-		vtkSmartPointer<vtkPolyData> mesh;
+		vtkSmartPointer<vtkUnstructuredGrid> mesh;
 		vtkSmartPointer<vtkPolyData> result;
 
 		void SetName(QString * _name);

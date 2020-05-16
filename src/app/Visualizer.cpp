@@ -7,10 +7,9 @@
 #include <vtkProperty.h>
 #include <vtkRenderer.h>
 #include <vtkPolyData.h>
-#include <vtkSTLReader.h>
 #include <vtkWindowToImageFilter.h>
 #include <vtkPNGWriter.h>
-#include "vtkOFFReader.h"
+#include <vtkDataSetMapper.h>
 
 #include <QFileInfo>
 
@@ -47,8 +46,31 @@ void Visualizer::loadModel(vtkPolyData * data) {
 	this->normalizeSize();
 }
 
-void Visualizer::loadMesh(vtkPolyData * data)
+void Visualizer::loadMesh(vtkUnstructuredGrid * data)
 {
+	vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+	mapper->SetInputData(data);
+
+	vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
+	actor->SetMapper(mapper);
+
+	///////////////////////////////////////////////////////////////////
+	// Rendering Tubes and Spheres in VTK
+	// https://blog.kitware.com/rendering-tubes-and-spheres-in-vtk/
+
+	//actor->GetProperty()->SetEdgeVisibility(1);
+	actor->GetProperty()->SetEdgeColor(0.9, 0.9, 0.4);
+	actor->GetProperty()->SetLineWidth(6);
+	actor->GetProperty()->SetPointSize(12);
+	actor->GetProperty()->SetRenderLinesAsTubes(1);
+	actor->GetProperty()->SetRenderPointsAsSpheres(1);
+	actor->GetProperty()->SetVertexVisibility(1);
+	actor->GetProperty()->SetVertexColor(0.5, 1.0, 0.8);
+	///////////////////////////////////////////////////////////////////
+
+	this->renderer->RemoveAllViewProps();
+	this->renderer->AddActor(actor);
+	this->normalizeSize();
 }
 
 void Visualizer::loadResult(vtkPolyData * data)

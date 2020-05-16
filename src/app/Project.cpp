@@ -5,7 +5,7 @@ Project::Project()
 	this->name = new QString("Новый");
 	this->path = new QString("");
 	this->model = vtkSmartPointer<vtkPolyData>::New();
-	this->mesh = vtkSmartPointer<vtkPolyData>::New();
+	this->mesh = vtkSmartPointer<vtkUnstructuredGrid>::New();
 	this->result = vtkSmartPointer<vtkPolyData>::New();
 }
 
@@ -37,7 +37,8 @@ bool Project::Save()
 	if (!dir.exists()) dir.mkpath(".");
 
 	// write vtkPolyData files
-	Converter::vtkPolyData_ToVTKFile(*path + QString("//model.vtp"), model);
+	Converter::vtkPolyData_ToVtkXMLFile(*path + QString("//model.vtp"), model);
+	Converter::vtkUnstructuredGrid_ToVTKXMLFile(*path + QString("//model.vtu"), mesh);
 
 	
 	// write project config file
@@ -47,13 +48,13 @@ bool Project::Save()
 
 void Project::LoadConfig()
 {
-// load model
+	// load model
 	this->model = vtkSmartPointer<vtkPolyData>::New();
 	Converter::geometryFile_ToVtkPolyData(path + QString("//model.vtp"), model);
 	
 	// load mesh
-	this->mesh = vtkSmartPointer<vtkPolyData>::New();
-	Converter::geometryFile_ToVtkPolyData(path + QString("//mesh.vtp"), mesh);
+	this->mesh = vtkSmartPointer<vtkUnstructuredGrid>::New();
+	Converter::meshFile_ToVtkUnstructuredGrid(path + QString("//mesh.vtu"), mesh);
 
 	// load result
 	this->result = vtkSmartPointer<vtkPolyData>::New();

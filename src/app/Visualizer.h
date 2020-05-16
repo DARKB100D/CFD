@@ -11,7 +11,7 @@ public:
 	Visualizer(Ui_MainWindow * ui);
 	~Visualizer();
 	void loadModel(vtkPolyData * data);
-	void loadMesh(vtkPolyData * data);
+	void loadMesh(vtkUnstructuredGrid * data);
 	void loadResult(vtkPolyData * data);
 	void setShowModel(bool _show);
 	void setShowMesh(bool _show);

@@ -44,18 +44,59 @@ void Converter::geometryFile_ToVtkPolyData(QString inputFileName, vtkPolyData * 
 
 		data->DeepCopy(reader->GetOutput());
 	}
-	//else if (suffix == "vtu") {
-	//	vtkSmartPointer<vtkXMLUnstructuredGridReader> reader = vtkSmartPointer<vtkXMLUnstructuredGridReader>::New();
-	//	reader->SetFileName(inputFileName.toLocal8Bit());
-	//	reader->Update();
-
-	//	data->DeepCopy(reader->GetOutput()); // vtkUnstructuredGrid
-	//}
 }
 
-void Converter::vtkPolyData_ToVTKFile(QString path, vtkPolyData * data)
+void Converter::vtkPolyData_ToVtkFile(QString path, vtkPolyData * data)
+{
+	vtkSmartPointer<vtkPolyDataWriter> polyDataWriter = vtkSmartPointer<vtkPolyDataWriter>::New();
+	polyDataWriter->SetFileName(path.toLocal8Bit());
+	polyDataWriter->SetInputData(data);
+	polyDataWriter->Write();
+}
+
+void Converter::vtkPolyData_ToVtkXMLFile(QString path, vtkPolyData * data)
 {
 	vtkSmartPointer<vtkXMLPolyDataWriter> polyDataWriter = vtkSmartPointer<vtkXMLPolyDataWriter>::New();
+	polyDataWriter->SetFileName(path.toLocal8Bit());
+	polyDataWriter->SetInputData(data);
+	polyDataWriter->Write();
+}
+
+void Converter::meshFile_ToVtkUnstructuredGrid(QString inputFileName, vtkUnstructuredGrid * data)
+{
+	QFile modelfile(inputFileName);
+	if (!modelfile.exists()) return;
+
+	QFileInfo fileinfo(inputFileName);
+	QString suffix = fileinfo.suffix(); // Returns the suffix (extension) of the file. The suffix consists of all characters in the file after(but not including) the last '.'.
+
+	if (suffix == "vtk") {
+		vtkSmartPointer<vtkUnstructuredGridReader> reader = vtkSmartPointer<vtkUnstructuredGridReader>::New();
+		reader->SetFileName(inputFileName.toLocal8Bit());
+		reader->Update();
+
+		data->DeepCopy(reader->GetOutput());
+	}
+	else if (suffix == "vtu") {
+		vtkSmartPointer<vtkXMLUnstructuredGridReader> reader = vtkSmartPointer<vtkXMLUnstructuredGridReader>::New();
+		reader->SetFileName(inputFileName.toLocal8Bit());
+		reader->Update();
+
+		data->DeepCopy(reader->GetOutput()); // vtkUnstructuredGrid
+	}
+}
+
+void Converter::vtkUnstructuredGrid_ToVTKFile(QString path, vtkUnstructuredGrid * data)
+{
+	vtkSmartPointer<vtkUnstructuredGridWriter> polyDataWriter = vtkSmartPointer<vtkUnstructuredGridWriter>::New();
+	polyDataWriter->SetFileName(path.toLocal8Bit());
+	polyDataWriter->SetInputData(data);
+	polyDataWriter->Write();
+}
+
+void Converter::vtkUnstructuredGrid_ToVTKXMLFile(QString path, vtkUnstructuredGrid * data)
+{
+	vtkSmartPointer<vtkXMLUnstructuredGridWriter> polyDataWriter = vtkSmartPointer<vtkXMLUnstructuredGridWriter>::New();
 	polyDataWriter->SetFileName(path.toLocal8Bit());
 	polyDataWriter->SetInputData(data);
 	polyDataWriter->Write();

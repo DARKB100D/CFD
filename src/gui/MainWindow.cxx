@@ -117,7 +117,7 @@ void MainWindow::addMesh()
 
 	if (selected_file.isNull()) return;
 
-	Converter::geometryFile_ToVtkPolyData(selected_file, project->mesh);
+	Converter::meshFile_ToVtkUnstructuredGrid(selected_file, project->mesh);
 
 	visualizer->loadMesh(project->mesh);
 }
