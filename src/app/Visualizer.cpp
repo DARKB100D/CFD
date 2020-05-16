@@ -25,8 +25,8 @@ Visualizer::Visualizer(Ui_MainWindow * ui)
 
 	// VTK/Qt wedded
 	vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
-	ui->qvtkWidget->SetRenderWindow(renderWindow);
-	ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
+	ui->qvtkWidget->setRenderWindow(renderWindow);
+	ui->qvtkWidget->renderWindow()->AddRenderer(renderer);
 }
 
 Visualizer::~Visualizer()
@@ -58,7 +58,7 @@ void Visualizer::loadMesh(vtkUnstructuredGrid * data)
 	// Rendering Tubes and Spheres in VTK
 	// https://blog.kitware.com/rendering-tubes-and-spheres-in-vtk/
 
-	//actor->GetProperty()->SetEdgeVisibility(1);
+	actor->GetProperty()->SetEdgeVisibility(1);
 	actor->GetProperty()->SetEdgeColor(0.9, 0.9, 0.4);
 	actor->GetProperty()->SetLineWidth(6);
 	actor->GetProperty()->SetPointSize(12);
