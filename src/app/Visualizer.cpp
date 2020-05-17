@@ -34,7 +34,10 @@ Visualizer::~Visualizer()
 }
 
 
-void Visualizer::loadModel(vtkPolyData * data) {
+void Visualizer::loadModel(vtkPolyData * data) 
+{
+	if (!data->GetNumberOfPoints()) return;
+	
 	vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 	mapper->SetInputData(data);
 
@@ -48,6 +51,8 @@ void Visualizer::loadModel(vtkPolyData * data) {
 
 void Visualizer::loadMesh(vtkUnstructuredGrid * data)
 {
+	if (!data->GetNumberOfPoints()) return;
+
 	vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 	mapper->SetInputData(data);
 
@@ -62,6 +67,7 @@ void Visualizer::loadMesh(vtkUnstructuredGrid * data)
 
 void Visualizer::loadResult(vtkPolyData * data)
 {
+	if (!data->GetNumberOfPoints()) return;
 }
 
 void Visualizer::setShowModel(bool _show)
