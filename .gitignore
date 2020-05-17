@@ -1,3 +1,4 @@
 # Ignore build folder
 project/.vs/
 project/x64/
+project/Win32/
