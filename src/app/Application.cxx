@@ -7,18 +7,17 @@ VTK_MODULE_INIT(vtkInteractionStyle);
 
 #include "..\gui\startupWindow.h"
  
-int main( int argc, char** argv )
+int main(int argc, char** argv)
 {
   // needed to ensure appropriate OpenGL context is created for VTK rendering.
   QSurfaceFormat::setDefaultFormat(QVTKOpenGLStereoWidget::defaultFormat());
 
-  // QT Stuff
-  QApplication app( argc, argv );
+  QApplication app(argc, argv);
  
   QApplication::setStyle("fusion");
 
-  StartupWindow MainWindow;
-  MainWindow.show();
+  StartupWindow window;
+  window.show();
  
   return app.exec();
 }
