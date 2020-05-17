@@ -15,6 +15,8 @@ int main( int argc, char** argv )
   // QT Stuff
   QApplication app( argc, argv );
  
+  QApplication::setStyle("fusion");
+
   StartupWindow MainWindow;
   MainWindow.show();
  
