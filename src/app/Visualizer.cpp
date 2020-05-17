@@ -10,6 +10,7 @@
 #include <vtkWindowToImageFilter.h>
 #include <vtkPNGWriter.h>
 #include <vtkDataSetMapper.h>
+#include <vtkExtractEdges.h>
 
 #include <QFileInfo>
 
@@ -53,13 +54,16 @@ void Visualizer::loadMesh(vtkUnstructuredGrid * data)
 {
 	if (!data->GetNumberOfPoints()) return;
 
-	vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-	mapper->SetInputData(data);
+	vtkSmartPointer<vtkExtractEdges> extractEdges = vtkSmartPointer<vtkExtractEdges>::New();
+	extractEdges->SetInputData(data);
+	extractEdges->Update();
+
+	vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+	mapper->SetInputConnection(extractEdges->GetOutputPort());
 
 	vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
 	actor->SetMapper(mapper);
-	actor->GetProperty()->SetRepresentationToWireframe();
-
+	
 	this->renderer->RemoveAllViewProps();
 	this->renderer->AddActor(actor);
 	this->normalizeSize();
