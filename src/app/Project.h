@@ -15,8 +15,8 @@
 class Project
 {
 	private:
-		QString * name;
-		QString * path;
+		QString name;
+		QString path;
 		SolverConfig * config;
 		void LoadConfig();
 
@@ -29,11 +29,11 @@ class Project
 		vtkSmartPointer<vtkUnstructuredGrid> mesh;
 		vtkSmartPointer<vtkPolyData> result;
 
-		void SetName(QString * _name);
-		const QString * GetName();
+		void SetName(QString _name);
+		QString GetName();
 
 		void SetPath(QString _path);
-		const QString * GetPath();
+		QString GetPath();
 
 		void SetConfig(QSettings * _cfg);
 		bool Save();

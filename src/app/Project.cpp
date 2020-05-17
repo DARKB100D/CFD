@@ -2,8 +2,8 @@
 
 Project::Project()
 {
-	this->name = new QString("Новый");
-	this->path = new QString("");
+	this->name = QObject::tr("РќРѕРІС‹Р№");
+	this->path = "";
 	this->model = vtkSmartPointer<vtkPolyData>::New();
 	this->mesh = vtkSmartPointer<vtkUnstructuredGrid>::New();
 	this->result = vtkSmartPointer<vtkPolyData>::New();
@@ -11,16 +11,13 @@ Project::Project()
 
 Project::Project(QString _path)
 {
-	this->path = new QString(_path);
+	this->path = _path;
 	this->LoadConfig();
 }
 
 Project::~Project()
 {
-	delete path;
-	delete name;
 	delete config;
-
 }
 
 void Project::SetConfig(QSettings * _cfg)
@@ -30,15 +27,15 @@ void Project::SetConfig(QSettings * _cfg)
 
 bool Project::Save()
 {
-	if (this->path->isEmpty()) return false;
+	if (this->path.isEmpty()) return false;
 
 	// create folder if not exist
-	QDir dir(*path);
+	QDir dir(path);
 	if (!dir.exists()) dir.mkpath(".");
 
 	// write vtkPolyData files
-	Converter::vtkPolyData_ToVtkXMLFile(*path + QString("//model.vtp"), model);
-	Converter::vtkUnstructuredGrid_ToVTKXMLFile(*path + QString("//mesh.vtu"), mesh);
+	Converter::vtkPolyData_ToVtkXMLFile(path + QString("//model.vtp"), model);
+	Converter::vtkUnstructuredGrid_ToVTKXMLFile(path + QString("//mesh.vtu"), mesh);
 
 	
 	// write project config file
@@ -66,22 +63,22 @@ void Project::LoadConfig()
 }
 
 
-void Project::SetName(QString * _name)
+void Project::SetName(QString _name)
 {
 	this->name = _name;
 }
 
-const QString * Project::GetName()
+QString Project::GetName()
 {
 	return this->name;
 }
 
 void Project::SetPath(QString _path)
 {
-	this->path = new QString(_path);
+	this->path = _path;
 }
 
-const QString * Project::GetPath()
+QString Project::GetPath()
 {
 	return this->path;
 }

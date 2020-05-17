@@ -20,6 +20,9 @@ MainWindow::MainWindow()
 	connectObjects();
 
 	this->project = new Project();
+
+	// Set window title
+	this->updateTitle();
 }
 
 MainWindow::MainWindow(QString _path) //: MainWindow()
@@ -41,6 +44,9 @@ MainWindow::MainWindow(QString _path) //: MainWindow()
 	this->visualizer->loadModel(this->project->model);
 	this->visualizer->loadMesh(this->project->mesh);
 	this->visualizer->loadResult(this->project->result);
+
+	// Set window title
+	this->updateTitle();
 }
 
 MainWindow::~MainWindow()
@@ -73,6 +79,11 @@ void MainWindow::connectObjects() {
 	connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
 }
 
+void MainWindow::updateTitle()
+{
+	this->setWindowTitle(tr("Вычислительная гемодинамика") + " - " + this->project->GetName() + " " + this->project->GetPath());
+}
+
 void MainWindow::createProject()
 {
 	MainWindow * window = new MainWindow();
@@ -99,6 +110,9 @@ void MainWindow::saveProject()
 		if (selected_path.isNull()) return;
 		this->project->SetPath(selected_path);
 	}
+
+	// Set window title
+	this->updateTitle();
 }
 
 void MainWindow::addModel() {

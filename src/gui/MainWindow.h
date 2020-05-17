@@ -47,4 +47,5 @@ private:
 	Project * project;
 	ISolve * solver;
 	void connectObjects();
+	void updateTitle();
 };
