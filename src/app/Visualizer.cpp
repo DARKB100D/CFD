@@ -53,20 +53,7 @@ void Visualizer::loadMesh(vtkUnstructuredGrid * data)
 
 	vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
 	actor->SetMapper(mapper);
-
-	///////////////////////////////////////////////////////////////////
-	// Rendering Tubes and Spheres in VTK
-	// https://blog.kitware.com/rendering-tubes-and-spheres-in-vtk/
-
-	actor->GetProperty()->SetEdgeVisibility(1);
-	actor->GetProperty()->SetEdgeColor(0.9, 0.9, 0.4);
-	actor->GetProperty()->SetLineWidth(6);
-	actor->GetProperty()->SetPointSize(12);
-	actor->GetProperty()->SetRenderLinesAsTubes(1);
-	actor->GetProperty()->SetRenderPointsAsSpheres(1);
-	actor->GetProperty()->SetVertexVisibility(1);
-	actor->GetProperty()->SetVertexColor(0.5, 1.0, 0.8);
-	///////////////////////////////////////////////////////////////////
+	actor->GetProperty()->SetRepresentationToWireframe();
 
 	this->renderer->RemoveAllViewProps();
 	this->renderer->AddActor(actor);
