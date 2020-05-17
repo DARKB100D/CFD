@@ -106,7 +106,7 @@ void Visualizer::saveScreenshot(QString selectedFilename) {
 	windowToImageFilter->Update();
 
 	vtkSmartPointer<vtkPNGWriter> writer = vtkSmartPointer<vtkPNGWriter>::New();
-	writer->SetFileName(selectedFilename.toLocal8Bit());
+	writer->SetFileName(selectedFilename.toUtf8());
 	writer->SetInputConnection(windowToImageFilter->GetOutputPort());
 	writer->Write();
 

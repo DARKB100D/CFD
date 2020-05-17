@@ -11,35 +11,35 @@ void Converter::geometryFile_ToVtkPolyData(QString inputFileName, vtkPolyData * 
 	if (suffix == "stl") {
 		vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
 		reader->MergingOn(); // from example
-		reader->SetFileName(inputFileName.toLocal8Bit());
+		reader->SetFileName(inputFileName.toUtf8());
 		reader->Update();
 		
 		data->DeepCopy(reader->GetOutput());
 	}
 	else if (suffix == "off") {
 		vtkSmartPointer<vtkOFFReader> reader = vtkSmartPointer<vtkOFFReader>::New();
-		reader->SetFileName(inputFileName.toLocal8Bit());
+		reader->SetFileName(inputFileName.toUtf8());
 		reader->Update();
 		
 		data->DeepCopy(reader->GetOutput());
 	}
 	else if (suffix == "vtk") {
 		vtkSmartPointer<vtkPolyDataReader> reader = vtkSmartPointer<vtkPolyDataReader>::New();
-		reader->SetFileName(inputFileName.toLocal8Bit());
+		reader->SetFileName(inputFileName.toUtf8());
 		reader->Update();
 
 		data->DeepCopy(reader->GetOutput());
 	}
 	//else if (suffix == "tec") {
 	//	vtkSmartPointer<vtkTecplotReader> reader = vtkSmartPointer<vtkTecplotReader>::New();
-	//	reader->SetFileName(inputFileName.toLocal8Bit());
+	//	reader->SetFileName(inputFileName.toUtf8());
 	//	reader->Update();
 
 	//	data->DeepCopy(reader->GetOutput()); // vtkMultiBlockDataSet
 	//}
 	else if (suffix == "vtp") {
 		vtkSmartPointer<vtkXMLPolyDataReader> reader = vtkSmartPointer<vtkXMLPolyDataReader>::New();
-		reader->SetFileName(inputFileName.toLocal8Bit());
+		reader->SetFileName(inputFileName.toUtf8());
 		reader->Update();
 
 		data->DeepCopy(reader->GetOutput());
@@ -49,7 +49,7 @@ void Converter::geometryFile_ToVtkPolyData(QString inputFileName, vtkPolyData * 
 void Converter::vtkPolyData_ToVtkFile(QString path, vtkPolyData * data)
 {
 	vtkSmartPointer<vtkPolyDataWriter> polyDataWriter = vtkSmartPointer<vtkPolyDataWriter>::New();
-	polyDataWriter->SetFileName(path.toLocal8Bit());
+	polyDataWriter->SetFileName(path.toUtf8());
 	polyDataWriter->SetInputData(data);
 	polyDataWriter->Write();
 }
@@ -57,7 +57,7 @@ void Converter::vtkPolyData_ToVtkFile(QString path, vtkPolyData * data)
 void Converter::vtkPolyData_ToVtkXMLFile(QString path, vtkPolyData * data)
 {
 	vtkSmartPointer<vtkXMLPolyDataWriter> polyDataWriter = vtkSmartPointer<vtkXMLPolyDataWriter>::New();
-	polyDataWriter->SetFileName(path.toLocal8Bit());
+	polyDataWriter->SetFileName(path.toUtf8());
 	polyDataWriter->SetInputData(data);
 	polyDataWriter->Write();
 }
@@ -72,14 +72,14 @@ void Converter::meshFile_ToVtkUnstructuredGrid(QString inputFileName, vtkUnstruc
 
 	if (suffix == "vtk") {
 		vtkSmartPointer<vtkUnstructuredGridReader> reader = vtkSmartPointer<vtkUnstructuredGridReader>::New();
-		reader->SetFileName(inputFileName.toLocal8Bit());
+		reader->SetFileName(inputFileName.toUtf8());
 		reader->Update();
 
 		data->DeepCopy(reader->GetOutput());
 	}
 	else if (suffix == "vtu") {
 		vtkSmartPointer<vtkXMLUnstructuredGridReader> reader = vtkSmartPointer<vtkXMLUnstructuredGridReader>::New();
-		reader->SetFileName(inputFileName.toLocal8Bit());
+		reader->SetFileName(inputFileName.toUtf8());
 		reader->Update();
 
 		data->DeepCopy(reader->GetOutput()); // vtkUnstructuredGrid
@@ -89,7 +89,7 @@ void Converter::meshFile_ToVtkUnstructuredGrid(QString inputFileName, vtkUnstruc
 void Converter::vtkUnstructuredGrid_ToVTKFile(QString path, vtkUnstructuredGrid * data)
 {
 	vtkSmartPointer<vtkUnstructuredGridWriter> polyDataWriter = vtkSmartPointer<vtkUnstructuredGridWriter>::New();
-	polyDataWriter->SetFileName(path.toLocal8Bit());
+	polyDataWriter->SetFileName(path.toUtf8());
 	polyDataWriter->SetInputData(data);
 	polyDataWriter->Write();
 }
@@ -97,7 +97,7 @@ void Converter::vtkUnstructuredGrid_ToVTKFile(QString path, vtkUnstructuredGrid 
 void Converter::vtkUnstructuredGrid_ToVTKXMLFile(QString path, vtkUnstructuredGrid * data)
 {
 	vtkSmartPointer<vtkXMLUnstructuredGridWriter> polyDataWriter = vtkSmartPointer<vtkXMLUnstructuredGridWriter>::New();
-	polyDataWriter->SetFileName(path.toLocal8Bit());
+	polyDataWriter->SetFileName(path.toUtf8());
 	polyDataWriter->SetInputData(data);
 	polyDataWriter->Write();
 }
