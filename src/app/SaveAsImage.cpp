@@ -1,1 +1,0 @@
-#include "SaveAsImage.h"

@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include "../app/Visualizer.h"
 #include "../app/Project.h"
+#include "../app/MeshGenerator.h"
 #include <qstring.h>
 
 // Forward Qt class declarations
@@ -41,11 +42,15 @@ public slots:
 	// help menu
 	void about();
 
+	// mesh menu
+	void generateMesh();
+
 private:
 	Ui_MainWindow * ui;
 	Visualizer * visualizer;
 	Project * project;
 	ISolve * solver;
+	MeshGenerator * meshGen;
 	void connectObjects();
 	void updateTitle();
 };

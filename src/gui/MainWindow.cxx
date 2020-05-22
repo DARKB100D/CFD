@@ -27,6 +27,9 @@ MainWindow::MainWindow()
 
 	// Set window title
 	this->updateTitle();
+
+	// create mesh generator
+	this->meshGen = new MeshGenerator();
 }
 
 MainWindow::MainWindow(QString _path) //: MainWindow()
@@ -63,6 +66,7 @@ MainWindow::~MainWindow()
 	delete visualizer;
 	delete project;
 	delete solver;
+	delete meshGen;
 }
 
 void MainWindow::connectObjects() {
@@ -85,6 +89,7 @@ void MainWindow::connectObjects() {
 	connect(ui->actionSaveAsTable, SIGNAL(triggered()), this, SLOT(saveAsDataTable()));
 
 	connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
+	connect(ui->actionMeshGenerate, SIGNAL(triggered()), this, SLOT(generateMesh()));
 }
 
 void MainWindow::updateTitle()
@@ -187,4 +192,13 @@ void MainWindow::about()
 		tr("<h2>Вычислительная гемодинамика</h2>"
 			"<p>Программный комплекс по расчету параметров течения крови в сосудах человека.<p>"
 			"<p>Исходный код: https://github.com/DARKB100D/CFD<p>"));
+}
+
+void MainWindow::generateMesh()
+{
+	QString in = this->project->GetPathModel();
+	QString out = this->project->GetPathMesh();
+	this->meshGen->generateMesh(in, out);
+	Converter::meshFile_ToVtkUnstructuredGrid(out, project->mesh);
+	visualizer->loadMesh(project->mesh);
 }

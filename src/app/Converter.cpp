@@ -43,6 +43,13 @@ void Converter::geometryFile_ToVtkPolyData(QString inputFileName, vtkPolyData * 
 		reader->Update();
 
 		data->DeepCopy(reader->GetOutput());
+	} 
+	else if (suffix == "ply") {
+		vtkSmartPointer<vtkPLYReader> reader = vtkSmartPointer<vtkPLYReader>::New();
+		reader->SetFileName(inputFileName.toUtf8());
+		reader->Update();
+
+		data->DeepCopy(reader->GetOutput());
 	}
 }
 
@@ -57,6 +64,14 @@ void Converter::vtkPolyData_ToVtkFile(QString path, vtkPolyData * data)
 void Converter::vtkPolyData_ToVtkXMLFile(QString path, vtkPolyData * data)
 {
 	vtkSmartPointer<vtkXMLPolyDataWriter> polyDataWriter = vtkSmartPointer<vtkXMLPolyDataWriter>::New();
+	polyDataWriter->SetFileName(path.toUtf8());
+	polyDataWriter->SetInputData(data);
+	polyDataWriter->Write();
+}
+
+void Converter::vtkPolyData_ToPLYFile(QString path, vtkPolyData * data)
+{
+	vtkSmartPointer<vtkPLYWriter> polyDataWriter = vtkSmartPointer<vtkPLYWriter>::New();
 	polyDataWriter->SetFileName(path.toUtf8());
 	polyDataWriter->SetInputData(data);
 	polyDataWriter->Write();
