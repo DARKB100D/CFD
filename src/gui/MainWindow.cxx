@@ -13,6 +13,10 @@ MainWindow::MainWindow()
 	this->ui = new Ui_MainWindow;
 	this->ui->setupUi(this);
 
+	// Set the parameters of the stretching areas
+	this->ui->splitter->setStretchFactor(0, 0);
+	this->ui->splitter->setStretchFactor(1, 1);
+
 	// Initialize VTK widget
 	this->visualizer = new Visualizer(ui);
 
@@ -30,6 +34,10 @@ MainWindow::MainWindow(QString _path) //: MainWindow()
 	// Load UI
 	this->ui = new Ui_MainWindow;
 	this->ui->setupUi(this);
+
+	// Set the parameters of the stretching areas
+	this->ui->splitter->setStretchFactor(0, 0);
+	this->ui->splitter->setStretchFactor(1, 1);
 
 	// Initialize VTK widget
 	this->visualizer = new Visualizer(ui);

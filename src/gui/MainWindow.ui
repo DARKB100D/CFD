@@ -32,7 +32,27 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QVTKOpenGLStereoWidget" name="qvtkWidget" native="true"/>
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QListWidget" name="structList">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+      <widget class="QVTKOpenGLStereoWidget" name="qvtkWidget" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -49,7 +69,7 @@
     <property name="title">
      <string>Файл</string>
     </property>
-    <widget class="QMenu" name="menu">
+    <widget class="QMenu" name="menuAdd">
      <property name="title">
       <string>Добавить в проект</string>
      </property>
@@ -60,34 +80,35 @@
      <addaction name="actionAddModel"/>
      <addaction name="actionAddMesh"/>
     </widget>
+    <widget class="QMenu" name="menuExport">
+     <property name="title">
+      <string>Экспорт</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../res/Resource.qrc">
+       <normaloff>:/Application/export.png</normaloff>:/Application/export.png</iconset>
+     </property>
+     <addaction name="actionSaveAsImage"/>
+     <addaction name="actionSaveAsTable"/>
+    </widget>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="separator"/>
-    <addaction name="menu"/>
+    <addaction name="menuAdd"/>
+    <addaction name="separator"/>
+    <addaction name="menuExport"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
-   </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
-     <string>Правка</string>
-    </property>
-    <addaction name="actionReset"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
      <string>Вид</string>
     </property>
-    <addaction name="actionViewModel"/>
-    <addaction name="actionViewMesh"/>
     <addaction name="actionViewResult"/>
-   </widget>
-   <widget class="QMenu" name="menuTools">
-    <property name="title">
-     <string>Инструменты</string>
-    </property>
-    <addaction name="actionSaveAsImage"/>
-    <addaction name="actionSaveAsTable"/>
+    <addaction name="actionViewMesh"/>
+    <addaction name="actionViewModel"/>
+    <addaction name="actionReset"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -95,10 +116,24 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuMesh">
+    <property name="title">
+     <string>Генератор сетки</string>
+    </property>
+    <addaction name="actionMeshGenerate"/>
+    <addaction name="actionMeshSettings"/>
+   </widget>
+   <widget class="QMenu" name="menuSolver">
+    <property name="title">
+     <string>Решатель</string>
+    </property>
+    <addaction name="actionSolve"/>
+    <addaction name="actionSolverSettings"/>
+   </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuEdit"/>
+   <addaction name="menuMesh"/>
+   <addaction name="menuSolver"/>
    <addaction name="menuView"/>
-   <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionAbout">
@@ -222,6 +257,42 @@
    </property>
    <property name="text">
     <string>Расчётную сетку...</string>
+   </property>
+  </action>
+  <action name="actionMeshGenerate">
+   <property name="icon">
+    <iconset resource="../res/Resource.qrc">
+     <normaloff>:/Application/mesh.png</normaloff>:/Application/mesh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Сгенрировать</string>
+   </property>
+  </action>
+  <action name="actionMeshSettings">
+   <property name="icon">
+    <iconset resource="../res/Resource.qrc">
+     <normaloff>:/Application/settings.png</normaloff>:/Application/settings.png</iconset>
+   </property>
+   <property name="text">
+    <string>Параметры сетки...</string>
+   </property>
+  </action>
+  <action name="actionSolve">
+   <property name="icon">
+    <iconset resource="../res/Resource.qrc">
+     <normaloff>:/Application/solve.png</normaloff>:/Application/solve.png</iconset>
+   </property>
+   <property name="text">
+    <string>Рассчитать</string>
+   </property>
+  </action>
+  <action name="actionSolverSettings">
+   <property name="icon">
+    <iconset resource="../res/Resource.qrc">
+     <normaloff>:/Application/settings.png</normaloff>:/Application/settings.png</iconset>
+   </property>
+   <property name="text">
+    <string>Параметры расчета...</string>
    </property>
   </action>
  </widget>
