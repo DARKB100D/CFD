@@ -56,10 +56,49 @@ void SettingsWindow::connectObjects()
 
 void SettingsWindow::loadConfigs()
 {
+	int index;
+		
+	index = ui->Algorithm->findData(meshConfig->Algorithm);
+	if (index != -1) ui->Algorithm->setCurrentIndex(index);
 
+	index = ui->Algorithm3D->findData(meshConfig->Algorithm3D);
+	if (index != -1) ui->Algorithm3D->setCurrentIndex(index);
+
+	index = ui->RecombinationAlgorithm->findData(meshConfig->RecombinationAlgorithm);
+	if (index != -1) ui->RecombinationAlgorithm->setCurrentIndex(index);
+	
+	ui->RecombineAll->setChecked(meshConfig->RecombineAll);
+	
+	index = ui->SubdivisionAlgorithm->findData(meshConfig->SubdivisionAlgorithm);
+	if (index != -1) ui->SubdivisionAlgorithm->setCurrentIndex(index);
+	
+	ui->Smooth->setValue(meshConfig->Smoothing);
+	
+	ui->CharacteristicLengthFactor->setValue(meshConfig->CharacteristicLengthFactor);
+	
+	ui->CharacteristicLengthMin->setValue(meshConfig->CharacteristicLengthMin);
+	
+	ui->CharacteristicLengthMax->setValue(meshConfig->CharacteristicLengthMax);
 }
 
 void SettingsWindow::writeConfigs()
 {
+	meshConfig->Algorithm = ui->Algorithm->currentData().toInt();
+	
+	meshConfig->Algorithm3D = ui->Algorithm3D->currentData().toInt();
+
+	meshConfig->RecombinationAlgorithm = ui->RecombinationAlgorithm->currentData().toInt();
+
+	meshConfig->RecombineAll = ui->RecombineAll->isChecked();
+
+	meshConfig->SubdivisionAlgorithm = ui->SubdivisionAlgorithm->currentData().toInt();
+
+	meshConfig->Smoothing = ui->Smooth->value();
+
+	meshConfig->CharacteristicLengthFactor = ui->CharacteristicLengthFactor->value();
+
+	meshConfig->CharacteristicLengthMin = ui->CharacteristicLengthMin->value();
+
+	meshConfig->CharacteristicLengthMax = ui->CharacteristicLengthMax->value();
 
 }

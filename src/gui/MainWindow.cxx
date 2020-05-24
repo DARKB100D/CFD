@@ -31,7 +31,7 @@ MainWindow::MainWindow()
 	this->updateTitle();
 
 	// create mesh generator
-	this->meshGen = new MeshGenerator();
+	this->meshGen = new MeshGenerator(&this->project->meshConfig);
 }
 
 MainWindow::MainWindow(QString _path) //: MainWindow()
@@ -60,6 +60,9 @@ MainWindow::MainWindow(QString _path) //: MainWindow()
 
 	// Set window title
 	this->updateTitle();
+
+	// create mesh generator
+	this->meshGen = new MeshGenerator(&this->project->meshConfig);
 }
 
 MainWindow::~MainWindow()
@@ -211,18 +214,18 @@ void MainWindow::meshGenerate()
 
 void MainWindow::settingsGeneral()
 {
-	SettingsWindow * window = new SettingsWindow(0, this->project->proConfig, this->project->meshConfig, this->project->solverConfig);
+	SettingsWindow * window = new SettingsWindow(0, &this->project->proConfig, &this->project->meshConfig, &this->project->solverConfig);
 	window->show();
 }
 
 void MainWindow::settingsMesh()
 {
-	SettingsWindow * window = new SettingsWindow(1, this->project->proConfig, this->project->meshConfig, this->project->solverConfig);
+	SettingsWindow * window = new SettingsWindow(1, &this->project->proConfig, &this->project->meshConfig, &this->project->solverConfig);
 	window->show();
 }
 
 void MainWindow::settingsSolver()
 {
-	SettingsWindow * window = new SettingsWindow(2, this->project->proConfig, this->project->meshConfig, this->project->solverConfig);
+	SettingsWindow * window = new SettingsWindow(2, &this->project->proConfig, &this->project->meshConfig, &this->project->solverConfig);
 	window->show();
 }

@@ -39,11 +39,12 @@ class Project
 		QString GetPathModel();
 		QString GetPathMesh();
 		QString GetPathResult();
+		QString GetPathConfig();
 
 		bool Save();
 
-		ProjectConfig * proConfig;
-		MeshConfig * meshConfig;
-		SolverConfig * solverConfig;
+		ProjectConfig proConfig;
+		MeshConfig meshConfig;
+		SolverConfig solverConfig;
 };
 

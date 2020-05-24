@@ -1,8 +1,8 @@
 #include "MeshGenerator.h"
 
-MeshGenerator::MeshGenerator()
+MeshGenerator::MeshGenerator(MeshConfig * config)
 {
-	
+	this->config = config;
 }
 
 MeshGenerator::~MeshGenerator()
@@ -16,15 +16,15 @@ void MeshGenerator::generateMesh(QString in, QString out)
 
 	gmsh::option::setNumber("General.Terminal", 1);
 
-	gmsh::option::setNumber("Mesh.Algorithm", 1);
-	gmsh::option::setNumber("Mesh.Algorithm3D", 1);
-	gmsh::option::setNumber("Mesh.RecombinationAlgorithm", 1);
-	gmsh::option::setNumber("Mesh.RecombineAll", 0);
-	gmsh::option::setNumber("Mesh.SubdivisionAlgorithm", 0);
-	gmsh::option::setNumber("Mesh.Smoothing", 10);
-	gmsh::option::setNumber("Mesh.CharacteristicLengthFactor", 1);
-	gmsh::option::setNumber("Mesh.CharacteristicLengthMin", 0);
-	gmsh::option::setNumber("Mesh.CharacteristicLengthMax", 1e+22);
+	gmsh::option::setNumber("Mesh.Algorithm", config->Algorithm);
+	gmsh::option::setNumber("Mesh.Algorithm3D", config->Algorithm3D);
+	gmsh::option::setNumber("Mesh.RecombinationAlgorithm", config->RecombinationAlgorithm);
+	gmsh::option::setNumber("Mesh.RecombineAll", config->RecombineAll);
+	gmsh::option::setNumber("Mesh.SubdivisionAlgorithm", config->SubdivisionAlgorithm);
+	gmsh::option::setNumber("Mesh.Smoothing", config->Smoothing);
+	gmsh::option::setNumber("Mesh.CharacteristicLengthFactor", config->CharacteristicLengthFactor);
+	gmsh::option::setNumber("Mesh.CharacteristicLengthMin", config->CharacteristicLengthMin);
+	gmsh::option::setNumber("Mesh.CharacteristicLengthMax", config->CharacteristicLengthMax);
 
 	gmsh::merge(in.toStdString());
 

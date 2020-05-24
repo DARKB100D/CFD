@@ -7,9 +7,6 @@ Project::Project()
 	this->model = vtkSmartPointer<vtkPolyData>::New();
 	this->mesh = vtkSmartPointer<vtkUnstructuredGrid>::New();
 	this->result = vtkSmartPointer<vtkPolyData>::New();
-	this->proConfig = new ProjectConfig;
-	this->meshConfig = new MeshConfig;
-	this->solverConfig = new SolverConfig;
 }
 
 Project::Project(QString _path)
@@ -20,9 +17,7 @@ Project::Project(QString _path)
 
 Project::~Project()
 {
-	delete proConfig;
-	delete meshConfig;
-	delete solverConfig;
+
 }
 
 bool Project::Save()
@@ -38,7 +33,13 @@ bool Project::Save()
 	Converter::vtkUnstructuredGrid_ToVTKFile(GetPathMesh(), mesh);
 	
 	// write project config file
-	
+	qRegisterMetaTypeStreamOperators<ProjectConfig>("ProjectConfig");
+	qRegisterMetaTypeStreamOperators<MeshConfig>("MeshConfig");
+	qRegisterMetaTypeStreamOperators<SolverConfig>("SolverConfig");
+	QSettings s(GetPathConfig(), QSettings::IniFormat);
+	s.setValue("project", QVariant::fromValue(meshConfig));
+	s.setValue("mesh", QVariant::fromValue(meshConfig));
+	s.setValue("solver", QVariant::fromValue(meshConfig));
 
 	return true;
 }
@@ -57,11 +58,16 @@ void Project::LoadConfig()
 	this->result = vtkSmartPointer<vtkPolyData>::New();
 
 	// load configuration
-	this->proConfig = new ProjectConfig;
-	this->meshConfig = new MeshConfig;
-	this->solverConfig = new SolverConfig;
-	/*QSettings cfg = 
-	this->name*/
+	qRegisterMetaTypeStreamOperators<ProjectConfig>("ProjectConfig");
+	qRegisterMetaTypeStreamOperators<MeshConfig>("MeshConfig");
+	qRegisterMetaTypeStreamOperators<SolverConfig>("SolverConfig");
+	QSettings s(GetPathConfig(), QSettings::IniFormat);
+	QVariant QVariantProject = s.value("project");
+	this->proConfig = QVariantProject.value<ProjectConfig>();
+	QVariant QVariantMesh = s.value("mesh");
+	this->meshConfig = QVariantMesh.value<MeshConfig>();
+	QVariant QVariantSolver = s.value("solver");
+	this->solverConfig = QVariantSolver.value<SolverConfig>();
 }
 
 
@@ -93,4 +99,50 @@ QString Project::GetPathModel()
 QString Project::GetPathMesh()
 {
 	return this->path + QString("/mesh.vtk");
+}
+
+QString Project::GetPathResult()
+{
+	return this->path + QString("/result.vtk");
+}
+
+QString Project::GetPathConfig()
+{
+	return this->path + QString("/config.ini");
+}
+
+
+
+QDataStream& operator<<(QDataStream& out, const ProjectConfig & v) {
+	return out;
+}
+
+QDataStream& operator>>(QDataStream& in, ProjectConfig & v) {
+	return in;
+}
+
+QDataStream& operator<<(QDataStream& out, const MeshConfig & v) {
+	out << v.Algorithm << v.Algorithm3D << v.RecombinationAlgorithm << v.RecombineAll << v.SubdivisionAlgorithm << v.Smoothing << v.CharacteristicLengthFactor << v.CharacteristicLengthMin << v.CharacteristicLengthMax;
+	return out;
+}
+
+QDataStream& operator>>(QDataStream& in, MeshConfig & v) {
+	in >> v.Algorithm;
+	in >> v.Algorithm3D;
+	in >> v.RecombinationAlgorithm;
+	in >> v.RecombineAll;
+	in >> v.SubdivisionAlgorithm;
+	in >> v.Smoothing;
+	in >> v.CharacteristicLengthFactor;
+	in >> v.CharacteristicLengthMin;
+	in >> v.CharacteristicLengthMax;
+	return in;
+}
+
+QDataStream& operator<<(QDataStream& out, const SolverConfig & v) {
+	return out;
+}
+
+QDataStream& operator>>(QDataStream& in, SolverConfig & v) {
+	return in;
 }
