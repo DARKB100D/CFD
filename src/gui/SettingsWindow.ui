@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SettingsWindow</class>
+ <widget class="QMainWindow" name="SettingsWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>443</width>
+    <height>318</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Настройки</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../res/Resource.qrc">
+    <normaloff>:/Application/settings.png</normaloff>:/Application/settings.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="tabPosition">
+       <enum>QTabWidget::West</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="documentMode">
+       <bool>false</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>false</bool>
+      </property>
+      <property name="movable">
+       <bool>false</bool>
+      </property>
+      <widget class="QWidget" name="tabGeneral">
+       <attribute name="title">
+        <string>Основные</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabMesh">
+       <attribute name="title">
+        <string>Генератор сетки</string>
+       </attribute>
+       <layout class="QFormLayout" name="formLayout">
+        <item row="0" column="0">
+         <widget class="QComboBox" name="Algorithm">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>2D Алгоритм</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QComboBox" name="Algorithm3D">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>3D Алгоритм</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QComboBox" name="RecombinationAlgorithm">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Алгоритм 2D рекомбинации</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QComboBox" name="SubdivisionAlgorithm">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Алгоритм разбиения поверхностей на части</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QSpinBox" name="Smooth">
+          <property name="maximum">
+           <number>100</number>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Количество шагов сглаживания</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Фактор размера элемента</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Минимальный размер элемента</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Максимальный размер элемента</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QCheckBox" name="RecombineAll">
+          <property name="toolTip">
+           <string>Применить алгоритм рекомбинации ко всем поверхностям</string>
+          </property>
+          <property name="text">
+           <string>Применить алгоритм рекомбинации ко всем поверхностям</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QDoubleSpinBox" name="CharacteristicLengthFactor">
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="QDoubleSpinBox" name="CharacteristicLengthMax">
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QDoubleSpinBox" name="CharacteristicLengthMin">
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabSolver">
+       <attribute name="title">
+        <string>Решатель</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnOk">
+        <property name="text">
+         <string>Ок</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnCancel">
+        <property name="text">
+         <string>Отмена</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../res/Resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -16,11 +16,15 @@ void MeshGenerator::generateMesh(QString in, QString out)
 
 	gmsh::option::setNumber("General.Terminal", 1);
 
-	gmsh::option::setNumber("Mesh.Algorithm", 8);
-	gmsh::option::setNumber("Mesh.CharacteristicLengthMin", 1);
-	gmsh::option::setNumber("Mesh.CharacteristicLengthMax", 2);
-	gmsh::option::setNumber("Mesh.Optimize", 1);
-	gmsh::option::setNumber("Mesh.QualityType", 2);
+	gmsh::option::setNumber("Mesh.Algorithm", 1);
+	gmsh::option::setNumber("Mesh.Algorithm3D", 1);
+	gmsh::option::setNumber("Mesh.RecombinationAlgorithm", 1);
+	gmsh::option::setNumber("Mesh.RecombineAll", 0);
+	gmsh::option::setNumber("Mesh.SubdivisionAlgorithm", 0);
+	gmsh::option::setNumber("Mesh.Smoothing", 10);
+	gmsh::option::setNumber("Mesh.CharacteristicLengthFactor", 1);
+	gmsh::option::setNumber("Mesh.CharacteristicLengthMin", 0);
+	gmsh::option::setNumber("Mesh.CharacteristicLengthMax", 1e+22);
 
 	gmsh::merge(in.toStdString());
 

@@ -7,6 +7,8 @@
 #include <QFileDialog>
 #include <QMessagebox>
 
+#include "SettingsWindow.h"
+
 MainWindow::MainWindow()
 {
 	// Load UI
@@ -89,7 +91,11 @@ void MainWindow::connectObjects() {
 	connect(ui->actionSaveAsTable, SIGNAL(triggered()), this, SLOT(saveAsDataTable()));
 
 	connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
-	connect(ui->actionMeshGenerate, SIGNAL(triggered()), this, SLOT(generateMesh()));
+	connect(ui->actionMeshGenerate, SIGNAL(triggered()), this, SLOT(meshGenerate()));
+
+	connect(ui->actionGeneralSettings, SIGNAL(triggered()), this, SLOT(settingsGeneral()));
+	connect(ui->actionMeshSettings, SIGNAL(triggered()), this, SLOT(settingsMesh()));
+	connect(ui->actionSolverSettings, SIGNAL(triggered()), this, SLOT(settingsSolver()));
 }
 
 void MainWindow::updateTitle()
@@ -194,11 +200,29 @@ void MainWindow::about()
 			"<p>Исходный код: https://github.com/DARKB100D/CFD<p>"));
 }
 
-void MainWindow::generateMesh()
+void MainWindow::meshGenerate()
 {
 	QString in = this->project->GetPathModel();
 	QString out = this->project->GetPathMesh();
 	this->meshGen->generateMesh(in, out);
 	Converter::meshFile_ToVtkUnstructuredGrid(out, project->mesh);
 	visualizer->loadMesh(project->mesh);
+}
+
+void MainWindow::settingsGeneral()
+{
+	SettingsWindow * window = new SettingsWindow(0, this->project->proConfig, this->project->meshConfig, this->project->solverConfig);
+	window->show();
+}
+
+void MainWindow::settingsMesh()
+{
+	SettingsWindow * window = new SettingsWindow(1, this->project->proConfig, this->project->meshConfig, this->project->solverConfig);
+	window->show();
+}
+
+void MainWindow::settingsSolver()
+{
+	SettingsWindow * window = new SettingsWindow(2, this->project->proConfig, this->project->meshConfig, this->project->solverConfig);
+	window->show();
 }

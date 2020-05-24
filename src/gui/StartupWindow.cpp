@@ -4,7 +4,7 @@
 // StartupWindow.h
 #include "ui_StartupWindow.h"
 
-#include "..\gui\mainWindow.h"
+#include "MainWindow.h"
 
 StartupWindow::StartupWindow() {
 	// Load UI

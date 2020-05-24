@@ -6,6 +6,8 @@
 #include "qdir.h"
 #include "qsettings.h"
 #include "DefaultSolver.h"
+#include "ProjectConfig.h"
+#include "MeshConfig.h"
 #include "SolverConfig.h"
 #include <vtkPolyData.h>
 #include <vtkUnstructuredGrid.h>
@@ -17,7 +19,6 @@ class Project
 	private:
 		QString name;
 		QString path;
-		SolverConfig * config;
 
 	public:
 		Project();
@@ -39,8 +40,10 @@ class Project
 		QString GetPathMesh();
 		QString GetPathResult();
 
-		void SetConfig(QSettings * _cfg);
 		bool Save();
 
+		ProjectConfig * proConfig;
+		MeshConfig * meshConfig;
+		SolverConfig * solverConfig;
 };
 

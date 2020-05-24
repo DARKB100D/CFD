@@ -99,6 +99,7 @@
     <addaction name="separator"/>
     <addaction name="menuExport"/>
     <addaction name="separator"/>
+    <addaction name="actionGeneralSettings"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuView">
@@ -293,6 +294,15 @@
    </property>
    <property name="text">
     <string>Параметры расчета...</string>
+   </property>
+  </action>
+  <action name="actionGeneralSettings">
+   <property name="icon">
+    <iconset resource="../res/Resource.qrc">
+     <normaloff>:/Application/settings.png</normaloff>:/Application/settings.png</iconset>
+   </property>
+   <property name="text">
+    <string>Параметры...</string>
    </property>
   </action>
  </widget>

@@ -202,7 +202,11 @@
     <ClCompile Include="..\src\gui\MainWindow.cxx" />
     <ClCompile Include="..\src\app\DefaultSolver.cpp" />
     <ClCompile Include="..\src\app\Project.cpp" />
-    <ClCompile Include="..\src\app\SolverConfig.cpp" />
+    <ClCompile Include="..\src\gui\MeshAlgorithm3DModel.cpp" />
+    <ClCompile Include="..\src\gui\MeshAlgorithmModel.cpp" />
+    <ClCompile Include="..\src\gui\MeshRecombinationAlgorithm.cpp" />
+    <ClCompile Include="..\src\gui\MeshSubdivisionAlgorithm.cpp" />
+    <ClCompile Include="..\src\gui\SettingsWindow.cpp" />
     <ClCompile Include="..\src\gui\StartupWindow.cpp" />
     <ClCompile Include="..\src\app\Visualizer.cpp" />
   </ItemGroup>
@@ -211,6 +215,7 @@
     <QtMoc Include="..\src\gui\StartupWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="..\src\gui\SettingsWindow.ui" />
     <QtUic Include="..\src\gui\StartupWindow.ui" />
     <QtUic Include="..\src\gui\MainWindow.ui" />
   </ItemGroup>
@@ -222,12 +227,19 @@
     <ClInclude Include="..\src\app\DefaultSolver.h" />
     <ClInclude Include="..\src\app\ISolve.h" />
     <ClInclude Include="..\src\app\IVisualize.h" />
+    <ClInclude Include="..\src\app\MeshConfig.h" />
     <ClInclude Include="..\src\app\MeshGenerator.h" />
     <ClInclude Include="..\src\app\Project.h" />
+    <ClInclude Include="..\src\app\ProjectConfig.h" />
     <ClInclude Include="..\src\app\SolverConfig.h" />
     <ClInclude Include="..\src\app\SolverResult.h" />
     <ClInclude Include="..\src\app\Visualizer.h" />
     <ClInclude Include="..\src\app\vtkOFFReader.h" />
+    <QtMoc Include="..\src\gui\MeshSubdivisionAlgorithm.h" />
+    <QtMoc Include="..\src\gui\MeshRecombinationAlgorithm.h" />
+    <QtMoc Include="..\src\gui\MeshAlgorithm3DModel.h" />
+    <QtMoc Include="..\src\gui\SettingsWindow.h" />
+    <QtMoc Include="..\src\gui\MeshAlgorithmModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

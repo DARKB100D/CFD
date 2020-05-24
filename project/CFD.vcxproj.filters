@@ -32,9 +32,6 @@
     <ClCompile Include="..\src\app\Project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\app\SolverConfig.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\gui\StartupWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,6 +45,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\app\MeshGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\MeshAlgorithmModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\SettingsWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\MeshAlgorithm3DModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\MeshRecombinationAlgorithm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\MeshSubdivisionAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -82,12 +94,33 @@
     <ClInclude Include="..\src\app\MeshGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\app\MeshConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\app\ProjectConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\src\gui\MainWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\src\gui\StartupWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\src\gui\MeshAlgorithmModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\src\gui\SettingsWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\src\gui\MeshAlgorithm3DModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\src\gui\MeshRecombinationAlgorithm.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\src\gui\MeshSubdivisionAlgorithm.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -101,6 +134,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\src\gui\MainWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\src\gui\SettingsWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

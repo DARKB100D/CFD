@@ -7,6 +7,9 @@ Project::Project()
 	this->model = vtkSmartPointer<vtkPolyData>::New();
 	this->mesh = vtkSmartPointer<vtkUnstructuredGrid>::New();
 	this->result = vtkSmartPointer<vtkPolyData>::New();
+	this->proConfig = new ProjectConfig;
+	this->meshConfig = new MeshConfig;
+	this->solverConfig = new SolverConfig;
 }
 
 Project::Project(QString _path)
@@ -17,12 +20,9 @@ Project::Project(QString _path)
 
 Project::~Project()
 {
-	delete config;
-}
-
-void Project::SetConfig(QSettings * _cfg)
-{
-
+	delete proConfig;
+	delete meshConfig;
+	delete solverConfig;
 }
 
 bool Project::Save()
@@ -56,8 +56,10 @@ void Project::LoadConfig()
 	// load result
 	this->result = vtkSmartPointer<vtkPolyData>::New();
 
-	// load project configuration
-
+	// load configuration
+	this->proConfig = new ProjectConfig;
+	this->meshConfig = new MeshConfig;
+	this->solverConfig = new SolverConfig;
 	/*QSettings cfg = 
 	this->name*/
 }

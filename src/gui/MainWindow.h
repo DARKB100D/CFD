@@ -43,7 +43,12 @@ public slots:
 	void about();
 
 	// mesh menu
-	void generateMesh();
+	void meshGenerate();
+
+	// settings actions
+	void settingsGeneral();
+	void settingsMesh();
+	void settingsSolver();
 
 private:
 	Ui_MainWindow * ui;
