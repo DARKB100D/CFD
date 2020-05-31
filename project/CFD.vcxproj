@@ -197,7 +197,9 @@
   <ItemGroup>
     <ClCompile Include="..\src\app\Application.cxx" />
     <ClCompile Include="..\src\app\Converter.cpp" />
+    <ClCompile Include="..\src\app\FVMSolver.cpp" />
     <ClCompile Include="..\src\app\MeshGenerator.cpp" />
+    <ClCompile Include="..\src\app\SPHSolver.cpp" />
     <ClCompile Include="..\src\app\vtkOFFReader.cxx" />
     <ClCompile Include="..\src\gui\MainWindow.cxx" />
     <ClCompile Include="..\src\app\FEMSolver.cpp" />
@@ -225,6 +227,7 @@
   <ItemGroup>
     <ClInclude Include="..\src\app\Converter.h" />
     <ClInclude Include="..\src\app\FEMSolver.h" />
+    <ClInclude Include="..\src\app\FVMSolver.h" />
     <ClInclude Include="..\src\app\ISolve.h" />
     <ClInclude Include="..\src\app\IVisualize.h" />
     <ClInclude Include="..\src\app\MeshConfig.h" />
@@ -233,6 +236,7 @@
     <ClInclude Include="..\src\app\ProjectConfig.h" />
     <ClInclude Include="..\src\app\SolverConfig.h" />
     <ClInclude Include="..\src\app\SolverResult.h" />
+    <ClInclude Include="..\src\app\SPHSolver.h" />
     <ClInclude Include="..\src\app\Visualizer.h" />
     <ClInclude Include="..\src\app\vtkOFFReader.h" />
     <QtMoc Include="..\src\gui\MeshSubdivisionAlgorithm.h" />
