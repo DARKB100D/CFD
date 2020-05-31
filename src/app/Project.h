@@ -5,7 +5,7 @@
 #include "QFileDialog"
 #include "qdir.h"
 #include "qsettings.h"
-#include "DefaultSolver.h"
+#include "ISolve.h"
 #include "ProjectConfig.h"
 #include "MeshConfig.h"
 #include "SolverConfig.h"

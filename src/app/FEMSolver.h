@@ -2,7 +2,7 @@
 
 #include "ISolve.h"
 
-class DefaultSolver : public ISolve
+class FEMSolver : public ISolve
 {
 	public:
 		SolverResult solve();

@@ -200,7 +200,7 @@
     <ClCompile Include="..\src\app\MeshGenerator.cpp" />
     <ClCompile Include="..\src\app\vtkOFFReader.cxx" />
     <ClCompile Include="..\src\gui\MainWindow.cxx" />
-    <ClCompile Include="..\src\app\DefaultSolver.cpp" />
+    <ClCompile Include="..\src\app\FEMSolver.cpp" />
     <ClCompile Include="..\src\app\Project.cpp" />
     <ClCompile Include="..\src\gui\MeshAlgorithm3DModel.cpp" />
     <ClCompile Include="..\src\gui\MeshAlgorithmModel.cpp" />
@@ -224,7 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\app\Converter.h" />
-    <ClInclude Include="..\src\app\DefaultSolver.h" />
+    <ClInclude Include="..\src\app\FEMSolver.h" />
     <ClInclude Include="..\src\app\ISolve.h" />
     <ClInclude Include="..\src\app\IVisualize.h" />
     <ClInclude Include="..\src\app\MeshConfig.h" />
