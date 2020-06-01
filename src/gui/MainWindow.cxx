@@ -205,11 +205,21 @@ void MainWindow::about()
 
 void MainWindow::meshGenerate()
 {
-	QString in = this->project->GetPathModel();
-	QString out = this->project->GetPathMesh();
-	this->meshGen->generateMesh(in, out);
-	Converter::meshFile_ToVtkUnstructuredGrid(out, project->mesh);
+	// сохраним во временное хранилище модель проекта
+	QString tempPathModel = QDir::tempPath() + "/model.ply";
+	Converter::vtkPolyData_ToPLYFile(tempPathModel, project->model);
+
+	// сгенерируем сетку
+	QString tempPathMesh = QDir::tempPath() + "/mesh.vtk";
+	meshGen->generateMesh(tempPathModel, tempPathMesh);
+	
+	// загрузим в проект полученный файл сетки
+	project->LoadMesh(tempPathMesh);
 	visualizer->loadMesh(project->mesh);
+	
+	// удалим временные файлы
+	QFile::remove(tempPathMesh);
+	QFile::remove(tempPathModel);
 }
 
 void MainWindow::settingsGeneral()

@@ -46,17 +46,11 @@ bool Project::Save()
 
 void Project::LoadConfig()
 {
-	// load model
-	this->model = vtkSmartPointer<vtkPolyData>::New();
-	Converter::geometryFile_ToVtkPolyData(GetPathModel(), model);
+	// load data
+	LoadModel(GetPathModel());
+	LoadMesh(GetPathMesh());
+	LoadResult(GetPathResult());
 	
-	// load mesh
-	this->mesh = vtkSmartPointer<vtkUnstructuredGrid>::New();
-	Converter::meshFile_ToVtkUnstructuredGrid(GetPathMesh(), mesh);
-
-	// load result
-	this->result = vtkSmartPointer<vtkPolyData>::New();
-
 	// load configuration
 	qRegisterMetaTypeStreamOperators<ProjectConfig>("ProjectConfig");
 	qRegisterMetaTypeStreamOperators<MeshConfig>("MeshConfig");
@@ -70,6 +64,24 @@ void Project::LoadConfig()
 	this->solverConfig = QVariantSolver.value<SolverConfig>();
 }
 
+
+void Project::LoadModel(QString path)
+{
+	this->model = vtkSmartPointer<vtkPolyData>::New();
+	Converter::geometryFile_ToVtkPolyData(path, model);
+}
+
+void Project::LoadMesh(QString path)
+{
+	this->mesh = vtkSmartPointer<vtkUnstructuredGrid>::New();
+	Converter::meshFile_ToVtkUnstructuredGrid(path, mesh);
+}
+
+void Project::LoadResult(QString path)
+{
+	this->result = vtkSmartPointer<vtkPolyData>::New();
+
+}
 
 void Project::SetName(QString _name)
 {

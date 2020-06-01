@@ -19,6 +19,7 @@ class Project
 	private:
 		QString name;
 		QString path;
+		void LoadConfig();
 
 	public:
 		Project();
@@ -29,8 +30,10 @@ class Project
 		vtkSmartPointer<vtkUnstructuredGrid> mesh;
 		vtkSmartPointer<vtkPolyData> result;
 
-		void LoadConfig();
-
+		void LoadModel(QString path);
+		void LoadMesh(QString path);
+		void LoadResult(QString path);
+				
 		void SetName(QString _name);
 		QString GetName();
 
