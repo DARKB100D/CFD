@@ -1,10 +1,15 @@
 #pragma once
-
+#include <iostream>
 #include "ISolve.h"
+#include "SolverConfig.h"
+//#include <engine.h>
+
+
 
 class FEMSolver : public ISolve
 {
+private: SolverConfig* config;
 	public:
-		SolverResult solve();
-		void loadConfig();
+		void solve(QString inputPath, QString outputUPath, QString outputPPath);
+		FEMSolver(SolverConfig* _config);
 };

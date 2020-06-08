@@ -1,11 +1,10 @@
 #pragma once
-
-#include "SolverResult.h"
+#include "qstring.h"
 
 __interface ISolve
 {
 	public:
-		SolverResult solve();
+		void solve(QString inputPath, QString outputUPath, QString outputPPath);
 		
 };
 

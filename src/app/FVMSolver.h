@@ -4,6 +4,6 @@
 
 class FVMSolver : public ISolve
 {
-	public:
-		SolverResult solve();
+	
+		
 };
