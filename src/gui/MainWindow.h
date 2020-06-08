@@ -4,6 +4,7 @@
 #include "../app/Visualizer.h"
 #include "../app/Project.h"
 #include "../app/MeshGenerator.h"
+#include "../app/FEMSolver.h"
 #include <QString.h>
 #include <QListWidget.h>
 #include <QIcon.h>
@@ -23,33 +24,37 @@ public:
 	void fillStructList();
 
 public slots:
-	// file menu
+	// project menu
 	void createProject();
 	void openProject();
 	void saveProject();
+
+	// add menu
 	void addModel();
 	void addMesh();
 	void addResultU();
 	void addResultP();
+	
+	// export menu
+	void saveAsPNG();
+	void saveAsDataTable();
+
+	void settingsGeneral();
 	void appExit();
+	
+	// mesh menu
+	void meshGenerate();
+	void settingsMesh();
+
+	// solver menu
+	void solve();
+	void settingsSolver();
 
 	// view menu
 	void normalizeSize();
 
-	// tools menu
-	void saveAsPNG();
-	void saveAsDataTable();
-
 	// help menu
 	void about();
-
-	// mesh menu
-	void meshGenerate();
-
-	// settings actions
-	void settingsGeneral();
-	void settingsMesh();
-	void settingsSolver();
 
 	// left panel
 	void structList_Click(QListWidgetItem *item);

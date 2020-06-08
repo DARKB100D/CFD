@@ -32,6 +32,9 @@ MainWindow::MainWindow()
 
 	// create mesh generator
 	this->meshGen = new MeshGenerator(&this->project->meshConfig);
+
+	// create FEM solver
+	this->solver = new FEMSolver(&this->project->solverConfig);
 }
 
 MainWindow::MainWindow(QString _path) //: MainWindow()
@@ -67,6 +70,9 @@ MainWindow::MainWindow(QString _path) //: MainWindow()
 
 	// create mesh generator
 	this->meshGen = new MeshGenerator(&this->project->meshConfig);
+
+	// create FEM solver
+	this->solver = new FEMSolver(&this->project->solverConfig);
 }
 
 MainWindow::~MainWindow()
@@ -115,7 +121,9 @@ void MainWindow::connectObjects() {
 	connect(ui->actionSaveAsTable, SIGNAL(triggered()), this, SLOT(saveAsDataTable()));
 
 	connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
+
 	connect(ui->actionMeshGenerate, SIGNAL(triggered()), this, SLOT(meshGenerate()));
+	connect(ui->actionSolve, SIGNAL(triggered()), this, SLOT(solve()));
 
 	connect(ui->actionGeneralSettings, SIGNAL(triggered()), this, SLOT(settingsGeneral()));
 	connect(ui->actionMeshSettings, SIGNAL(triggered()), this, SLOT(settingsMesh()));
@@ -144,7 +152,6 @@ void MainWindow::openProject()
 	MainWindow * window = new MainWindow(selected_path);
 
 	window->show();
-
 }
 
 void MainWindow::saveProject()
@@ -250,6 +257,8 @@ void MainWindow::meshGenerate()
 	QFile::remove(tempPathModel);
 }
 
+
+
 void MainWindow::settingsGeneral()
 {
 	SettingsWindow * window = new SettingsWindow(0, &this->project->proConfig, &this->project->meshConfig, &this->project->solverConfig);
@@ -260,6 +269,29 @@ void MainWindow::settingsMesh()
 {
 	SettingsWindow * window = new SettingsWindow(1, &this->project->proConfig, &this->project->meshConfig, &this->project->solverConfig);
 	window->show();
+}
+
+void MainWindow::solve()
+{
+	// сохраним во временное хранилище расчетную сетку
+	QString tempPathMesh = QDir::tempPath() + "/mesh.msh";
+	//Converter::vtkPolyData_ToPLYFile(tempPathModel, project->model);
+
+	// запустим решатель
+	QString tempPathResultU = QDir::tempPath() + "/result_u.vtk";
+	QString tempPathResultP = QDir::tempPath() + "/result_p.vtk";
+	solver->solve(tempPathMesh, tempPathResultU, tempPathResultP);
+
+	// загрузим в проект полученный файл сетки
+	project->LoadResultU(tempPathResultU);
+	visualizer->loadResultU(project->result_u);
+	project->LoadResultP(tempPathResultP);
+	visualizer->loadResultP(project->result_p);
+
+	// удалим временные файлы
+	QFile::remove(tempPathMesh);
+	QFile::remove(tempPathResultU);
+	QFile::remove(tempPathResultP);
 }
 
 void MainWindow::settingsSolver()
