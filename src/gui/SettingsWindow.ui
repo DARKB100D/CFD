@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Настройки</string>
+   <string>Параметры</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../res/Resource.qrc">
