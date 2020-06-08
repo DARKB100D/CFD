@@ -9,7 +9,8 @@ __interface IVisualize
 	public:
 		void loadModel(vtkPolyData * data);
 		void loadMesh(vtkUnstructuredGrid * data);
-		void loadResult(vtkPolyData * data);
+		void loadResultU(vtkUnstructuredGrid * data);
+		void loadResultP(vtkUnstructuredGrid * data);
 		void setShowModel(bool _show);
 		void setShowMesh(bool _show);
 		void setShowResult(bool _show);

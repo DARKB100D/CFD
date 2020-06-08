@@ -79,6 +79,8 @@
      </property>
      <addaction name="actionAddModel"/>
      <addaction name="actionAddMesh"/>
+     <addaction name="actionAddResultU"/>
+     <addaction name="actionAddResultP"/>
     </widget>
     <widget class="QMenu" name="menuExport">
      <property name="title">
@@ -303,6 +305,16 @@
    </property>
    <property name="text">
     <string>Параметры...</string>
+   </property>
+  </action>
+  <action name="actionAddResultU">
+   <property name="text">
+    <string>Результат (скорость)...</string>
+   </property>
+  </action>
+  <action name="actionAddResultP">
+   <property name="text">
+    <string>Результат (давление)...</string>
    </property>
   </action>
  </widget>

@@ -25,6 +25,8 @@ public slots:
 	void saveProject();
 	void addModel();
 	void addMesh();
+	void addResultU();
+	void addResultP();
 	void appExit();
 
 	// edit menu

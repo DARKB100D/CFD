@@ -28,12 +28,14 @@ class Project
 
 		vtkSmartPointer<vtkPolyData> model;
 		vtkSmartPointer<vtkUnstructuredGrid> mesh;
-		vtkSmartPointer<vtkPolyData> result;
+		vtkSmartPointer<vtkUnstructuredGrid> result_u;
+		vtkSmartPointer<vtkUnstructuredGrid> result_p;
 
 		void LoadModel(QString path);
 		void LoadMesh(QString path);
-		void LoadResult(QString path);
-				
+		void LoadResultU(QString path);
+		void LoadResultP(QString path);
+
 		void SetName(QString _name);
 		QString GetName();
 
@@ -41,7 +43,8 @@ class Project
 		QString GetPath();
 		QString GetPathModel();
 		QString GetPathMesh();
-		QString GetPathResult();
+		QString GetPathResultU();
+		QString GetPathResultP();
 		QString GetPathConfig();
 
 		bool Save();

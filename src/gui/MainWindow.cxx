@@ -56,7 +56,8 @@ MainWindow::MainWindow(QString _path) //: MainWindow()
 	// Visualize project data
 	this->visualizer->loadModel(this->project->model);
 	this->visualizer->loadMesh(this->project->mesh);
-	this->visualizer->loadResult(this->project->result);
+	this->visualizer->loadResultU(this->project->result_u);
+	this->visualizer->loadResultP(this->project->result_p);
 
 	// Set window title
 	this->updateTitle();
@@ -81,6 +82,8 @@ void MainWindow::connectObjects() {
 	
 	connect(ui->actionAddModel, SIGNAL(triggered()), this, SLOT(addModel()));
 	connect(ui->actionAddMesh, SIGNAL(triggered()), this, SLOT(addMesh()));
+	connect(ui->actionAddResultU, SIGNAL(triggered()), this, SLOT(addResultU()));
+	connect(ui->actionAddResultP, SIGNAL(triggered()), this, SLOT(addResultP()));
 
 	connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(appExit()));
 	
@@ -156,6 +159,26 @@ void MainWindow::addMesh()
 	Converter::meshFile_ToVtkUnstructuredGrid(selected_file, project->mesh);
 
 	visualizer->loadMesh(project->mesh);
+}
+
+void MainWindow::addResultU() {
+	QString selected_file = QFileDialog::getOpenFileName(this, tr("Выберите файл"), QApplication::applicationDirPath());
+
+	if (selected_file.isNull()) return;
+
+	Converter::meshFile_ToVtkUnstructuredGrid(selected_file, project->result_u);
+
+	visualizer->loadResultU(project->result_u);
+}
+
+void MainWindow::addResultP() {
+	QString selected_file = QFileDialog::getOpenFileName(this, tr("Выберите файл"), QApplication::applicationDirPath());
+
+	if (selected_file.isNull()) return;
+
+	Converter::meshFile_ToVtkUnstructuredGrid(selected_file, project->result_p);
+
+	visualizer->loadResultP(project->result_p);
 }
 
 void MainWindow::appExit()

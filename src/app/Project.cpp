@@ -6,7 +6,8 @@ Project::Project()
 	this->path = "";
 	this->model = vtkSmartPointer<vtkPolyData>::New();
 	this->mesh = vtkSmartPointer<vtkUnstructuredGrid>::New();
-	this->result = vtkSmartPointer<vtkPolyData>::New();
+	this->result_u = vtkSmartPointer<vtkUnstructuredGrid>::New();
+	this->result_p = vtkSmartPointer<vtkUnstructuredGrid>::New();
 }
 
 Project::Project(QString _path)
@@ -49,8 +50,9 @@ void Project::LoadConfig()
 	// load data
 	LoadModel(GetPathModel());
 	LoadMesh(GetPathMesh());
-	LoadResult(GetPathResult());
-	
+	LoadResultU(GetPathResultU());
+	LoadResultP(GetPathResultP());
+
 	// load configuration
 	qRegisterMetaTypeStreamOperators<ProjectConfig>("ProjectConfig");
 	qRegisterMetaTypeStreamOperators<MeshConfig>("MeshConfig");
@@ -77,10 +79,16 @@ void Project::LoadMesh(QString path)
 	Converter::meshFile_ToVtkUnstructuredGrid(path, mesh);
 }
 
-void Project::LoadResult(QString path)
+void Project::LoadResultU(QString path)
 {
-	this->result = vtkSmartPointer<vtkPolyData>::New();
+	this->result_u = vtkSmartPointer<vtkUnstructuredGrid>::New();
+	Converter::meshFile_ToVtkUnstructuredGrid(path, result_u);
+}
 
+void Project::LoadResultP(QString path)
+{
+	this->result_p = vtkSmartPointer<vtkUnstructuredGrid>::New();
+	Converter::meshFile_ToVtkUnstructuredGrid(path, result_p);
 }
 
 void Project::SetName(QString _name)
@@ -113,9 +121,14 @@ QString Project::GetPathMesh()
 	return this->path + QString("/mesh.vtk");
 }
 
-QString Project::GetPathResult()
+QString Project::GetPathResultU()
 {
-	return this->path + QString("/result.vtk");
+	return this->path + QString("/result_u.vtk");
+}
+
+QString Project::GetPathResultP()
+{
+	return this->path + QString("/result_p.vtk");
 }
 
 QString Project::GetPathConfig()
