@@ -4,7 +4,9 @@
 #include "../app/Visualizer.h"
 #include "../app/Project.h"
 #include "../app/MeshGenerator.h"
-#include <qstring.h>
+#include <QString.h>
+#include <QListWidget.h>
+#include <QIcon.h>
 
 // Forward Qt class declarations
 class Ui_MainWindow;
@@ -17,6 +19,8 @@ public:
 	MainWindow();
 	MainWindow(QString projectPath);
 	~MainWindow();
+	void structList_AddItem(QString name, QString value, QIcon icon);
+	void fillStructList();
 
 public slots:
 	// file menu
@@ -29,13 +33,8 @@ public slots:
 	void addResultP();
 	void appExit();
 
-	// edit menu
-	void normalizeSize();
-
 	// view menu
-	void viewModel();
-	void viewMesh();
-	void viewResult();
+	void normalizeSize();
 
 	// tools menu
 	void saveAsPNG();
@@ -51,6 +50,9 @@ public slots:
 	void settingsGeneral();
 	void settingsMesh();
 	void settingsSolver();
+
+	// left panel
+	void structList_Click(QListWidgetItem *item);
 
 private:
 	Ui_MainWindow * ui;

@@ -49,6 +49,9 @@ MainWindow::MainWindow(QString _path) //: MainWindow()
 
 	// Set up action signals and slots
 	connectObjects(); 
+
+	// add items to left panel
+	fillStructList();
 	
 	// Open project
 	this->project = new Project(_path);
@@ -75,6 +78,25 @@ MainWindow::~MainWindow()
 	delete meshGen;
 }
 
+void MainWindow::structList_AddItem(QString name, QString value, QIcon icon)
+{
+	QVariant fullData(value);
+
+	QListWidgetItem * newItem = new QListWidgetItem;
+	newItem->setData(Qt::UserRole, fullData);
+	newItem->setText(name);
+	newItem->setIcon(icon);
+	ui->structListWidget->addItem(newItem);
+}
+
+void MainWindow::fillStructList()
+{
+	structList_AddItem("Модель", "model", QIcon(":/Application/model.png"));
+	structList_AddItem("Сетка", "mesh", QIcon(":/Application/mesh.png"));
+	structList_AddItem("Скорость", "velocity", QIcon(":/Application/velocity.png"));
+	structList_AddItem("Давление", "pressure", QIcon(":/Application/pressure.png"));
+}
+
 void MainWindow::connectObjects() {
 	connect(ui->actionNew, SIGNAL(triggered()), this, SLOT(createProject()));
 	connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(openProject()));
@@ -88,10 +110,6 @@ void MainWindow::connectObjects() {
 	connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(appExit()));
 	
 	connect(ui->actionReset, SIGNAL(triggered()), this, SLOT(normalizeSize()));
-
-	connect(ui->actionViewModel, SIGNAL(triggered()), this, SLOT(viewModel()));
-	connect(ui->actionViewMesh, SIGNAL(triggered()), this, SLOT(viewMesh()));
-	connect(ui->actionViewResult, SIGNAL(triggered()), this, SLOT(viewResult()));
 		
 	connect(ui->actionSaveAsImage, SIGNAL(triggered()), this, SLOT(saveAsPNG()));
 	connect(ui->actionSaveAsTable, SIGNAL(triggered()), this, SLOT(saveAsDataTable()));
@@ -102,6 +120,8 @@ void MainWindow::connectObjects() {
 	connect(ui->actionGeneralSettings, SIGNAL(triggered()), this, SLOT(settingsGeneral()));
 	connect(ui->actionMeshSettings, SIGNAL(triggered()), this, SLOT(settingsMesh()));
 	connect(ui->actionSolverSettings, SIGNAL(triggered()), this, SLOT(settingsSolver()));
+
+	connect(ui->structListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(structList_Click(QListWidgetItem*)));
 }
 
 void MainWindow::updateTitle()
@@ -190,21 +210,6 @@ void MainWindow::normalizeSize() {
 	this->visualizer->normalizeSize();
 }
 
-void MainWindow::viewModel()
-{
-	this->visualizer->setShowModel(this->ui->actionViewModel->isChecked());
-}
-
-void MainWindow::viewMesh()
-{
-	this->visualizer->setShowMesh(this->ui->actionViewMesh->isChecked());
-}
-
-void MainWindow::viewResult()
-{
-	this->visualizer->setShowResult(this->ui->actionViewResult->isChecked());
-}
-
 void MainWindow::saveAsPNG() {
 	QString selected_file = QFileDialog::getSaveFileName(this, tr("Сохранить картинку"), QApplication::applicationDirPath(), "*.png");
 
@@ -261,4 +266,23 @@ void MainWindow::settingsSolver()
 {
 	SettingsWindow * window = new SettingsWindow(2, &this->project->proConfig, &this->project->meshConfig, &this->project->solverConfig);
 	window->show();
+}
+
+void MainWindow::structList_Click(QListWidgetItem * item)
+{
+	QVariant data = item->data(Qt::UserRole);
+	QString value = data.toString();
+
+	if (value == "model") {
+		visualizer->loadModel(project->model);
+	}
+	else if (value == "mesh") {
+		visualizer->loadMesh(project->mesh);
+	}
+	else if (value == "velocity") {
+		visualizer->loadResultU(project->result_u);
+	}
+	else if (value == "pressure") {
+		visualizer->loadResultP(project->result_p);
+	}
 }

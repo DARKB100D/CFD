@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
-#include <qlistwidget.h>
+#include <QListWidget.h>
 
 // Forward Qt class declarations
 class Ui_StartupWindow;

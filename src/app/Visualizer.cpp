@@ -219,24 +219,6 @@ void Visualizer::loadResultP(vtkUnstructuredGrid * data)
 	this->normalizeSize();
 }
 
-void Visualizer::setShowModel(bool _show)
-{
-	showModel = _show;
-	this->update();
-}
-
-void Visualizer::setShowMesh(bool _show)
-{
-	showMesh = _show;
-	this->update();
-}
-
-void Visualizer::setShowResult(bool _show)
-{
-	showResult = _show;
-	this->update();
-}
-
 void Visualizer::normalizeSize() {
 	this->renderer->ResetCamera();
 	this->renderer->GetRenderWindow()->Render();
@@ -256,11 +238,4 @@ void Visualizer::saveScreenshot(QString selectedFilename) {
 	writer->Write();
 
 	this->renderer->GetRenderWindow()->Render(); // normalize
-}
-
-void Visualizer::update()
-{
-	if (showModel) {}
-	if (showMesh) {}
-	if (showResult) {}
 }

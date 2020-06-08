@@ -36,7 +36,7 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QListWidget" name="structList">
+      <widget class="QListWidget" name="structListWidget">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -108,9 +108,6 @@
     <property name="title">
      <string>Вид</string>
     </property>
-    <addaction name="actionViewResult"/>
-    <addaction name="actionViewMesh"/>
-    <addaction name="actionViewModel"/>
     <addaction name="actionReset"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
