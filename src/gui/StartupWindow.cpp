@@ -59,13 +59,7 @@ void StartupWindow::connectObjects()
 	connect(ui->ProjectsListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(projectList_Click(QListWidgetItem*)));
 }
 
-void StartupWindow::fillProjectHistory()
-{
-	// load recent projects list
-
-	// add items
-	QString path = "D:\\Hemodynamics\\TST";
-	QString name = "Test project";
+void StartupWindow::projectHistory_AddItem(QString name, QString path) {
 	QVariant fullFilePathData(path);
 
 	QListWidgetItem * newItem = new QListWidgetItem;
@@ -73,4 +67,12 @@ void StartupWindow::fillProjectHistory()
 	newItem->setText(name + " (" + path + ")");
 	newItem->setIcon(QIcon(":/Application/project.png"));
 	ui->ProjectsListWidget->addItem(newItem);
+}
+
+void StartupWindow::fillProjectHistory()
+{
+	// load recent projects list
+
+	// add items
+	projectHistory_AddItem("Test project", "D:\\Hemodynamics\\TST");
 }

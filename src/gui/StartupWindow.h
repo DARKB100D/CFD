@@ -16,6 +16,7 @@ private:
 	Q_OBJECT
 	Ui_StartupWindow * ui;
 	void connectObjects();
+	void projectHistory_AddItem(QString name, QString path);
 	void fillProjectHistory();
 
 public slots:
