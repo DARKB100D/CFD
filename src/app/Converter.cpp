@@ -116,3 +116,7 @@ void Converter::vtkUnstructuredGrid_ToVTKXMLFile(QString path, vtkUnstructuredGr
 	polyDataWriter->SetInputData(data);
 	polyDataWriter->Write();
 }
+
+void Converter::vtkUnstructuredGrid_ToMSHFile(QString path, vtkUnstructuredGrid * data)
+{
+}

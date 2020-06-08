@@ -22,6 +22,9 @@
 
 #include <vtkTecplotReader.h>
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <gmsh.h>
 
 class Converter
 {
@@ -35,5 +38,6 @@ public:
 	static void meshFile_ToVtkUnstructuredGrid(QString inputFileName, vtkUnstructuredGrid * data);
 	static void vtkUnstructuredGrid_ToVTKFile(QString path, vtkUnstructuredGrid * data);
 	static void vtkUnstructuredGrid_ToVTKXMLFile(QString path, vtkUnstructuredGrid * data);
+	static void vtkUnstructuredGrid_ToMSHFile(QString path, vtkUnstructuredGrid * data);
 };
 
