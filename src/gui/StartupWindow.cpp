@@ -71,5 +71,6 @@ void StartupWindow::fillProjectHistory()
 	QListWidgetItem * newItem = new QListWidgetItem;
 	newItem->setData(Qt::UserRole, fullFilePathData);
 	newItem->setText(name + " (" + path + ")");
+	newItem->setIcon(QIcon(":/Application/project.png"));
 	ui->ProjectsListWidget->addItem(newItem);
 }

@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/Application">
+    <file>project.png</file>
     <file>pressure.png</file>
     <file>velocity.png</file>
     <file>settings.png</file>
