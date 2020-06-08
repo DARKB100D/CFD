@@ -308,11 +308,19 @@
    </property>
   </action>
   <action name="actionAddResultU">
+   <property name="icon">
+    <iconset resource="../res/Resource.qrc">
+     <normaloff>:/Application/velocity.png</normaloff>:/Application/velocity.png</iconset>
+   </property>
    <property name="text">
     <string>Результат (скорость)...</string>
    </property>
   </action>
   <action name="actionAddResultP">
+   <property name="icon">
+    <iconset resource="../res/Resource.qrc">
+     <normaloff>:/Application/pressure.png</normaloff>:/Application/pressure.png</iconset>
+   </property>
    <property name="text">
     <string>Результат (давление)...</string>
    </property>
