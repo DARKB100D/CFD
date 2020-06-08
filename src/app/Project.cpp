@@ -32,7 +32,9 @@ bool Project::Save()
 	// write vtkPolyData files
 	Converter::vtkPolyData_ToPLYFile(GetPathModel(), model);
 	Converter::vtkUnstructuredGrid_ToVTKFile(GetPathMesh(), mesh);
-	
+	Converter::vtkUnstructuredGrid_ToVTKFile(GetPathResultU(), result_u);
+	Converter::vtkUnstructuredGrid_ToVTKFile(GetPathResultP(), result_p);
+
 	// write project config file
 	qRegisterMetaTypeStreamOperators<ProjectConfig>("ProjectConfig");
 	qRegisterMetaTypeStreamOperators<MeshConfig>("MeshConfig");
