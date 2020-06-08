@@ -4,6 +4,5 @@
 
 class SPHSolver : public ISolve
 {
-	public:
-		SolverResult solve();
+
 };

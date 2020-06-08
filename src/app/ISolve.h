@@ -1,12 +1,12 @@
 #pragma once
 
 #include "SolverResult.h"
-#include <qstring.h>
+#include <QString.h>
 
 __interface ISolve
 {
-public:
-	void solve(QString in, QString out1, QString out2);
+	public:
+		void solve(QString inputPath, QString outputUPath, QString outputPPath);
 		
 };
 
