@@ -34,7 +34,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideNone</enum>
@@ -207,6 +207,67 @@
        <attribute name="title">
         <string>Решатель</string>
        </attribute>
+       <layout class="QFormLayout" name="formLayout_2">
+        <item row="0" column="0">
+         <widget class="QDoubleSpinBox" name="Viscosity">
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLineEdit" name="R_X">
+          <property name="maxLength">
+           <number>50</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>X (формула)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLineEdit" name="R_Y">
+          <property name="maxLength">
+           <number>50</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>Y (формула)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLineEdit" name="R_Z">
+          <property name="maxLength">
+           <number>50</number>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Z (формула)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Вязкость крови</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>

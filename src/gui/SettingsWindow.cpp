@@ -56,6 +56,7 @@ void SettingsWindow::connectObjects()
 
 void SettingsWindow::loadConfigs()
 {
+	// mesh generator
 	int index;
 		
 	index = ui->Algorithm->findData(meshConfig->Algorithm);
@@ -79,10 +80,21 @@ void SettingsWindow::loadConfigs()
 	ui->CharacteristicLengthMin->setValue(meshConfig->CharacteristicLengthMin);
 	
 	ui->CharacteristicLengthMax->setValue(meshConfig->CharacteristicLengthMax);
+	
+
+	// solver
+	ui->Viscosity->setValue(solverConfig->Viscosity);
+	
+	ui->R_X->setText(solverConfig->R_X);
+	
+	ui->R_Y->setText(solverConfig->R_Y);
+	
+	ui->R_Z->setText(solverConfig->R_Z);
 }
 
 void SettingsWindow::writeConfigs()
 {
+	// mesh generator
 	meshConfig->Algorithm = ui->Algorithm->currentData().toInt();
 	
 	meshConfig->Algorithm3D = ui->Algorithm3D->currentData().toInt();
@@ -101,4 +113,13 @@ void SettingsWindow::writeConfigs()
 
 	meshConfig->CharacteristicLengthMax = ui->CharacteristicLengthMax->value();
 
+
+	// solver
+	solverConfig->Viscosity = ui->Viscosity->value();
+
+	solverConfig->R_X = ui->R_X->text();
+
+	solverConfig->R_Y = ui->R_Y->text();
+
+	solverConfig->R_Z = ui->R_Z->text();
 }
