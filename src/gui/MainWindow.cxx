@@ -25,6 +25,10 @@ MainWindow::MainWindow()
 	// Set up action signals and slots
 	connectObjects();
 
+	// Add items to left panel
+	fillStructList();
+
+	// Create project
 	this->project = new Project();
 
 	// Set window title
@@ -53,7 +57,7 @@ MainWindow::MainWindow(QString _path) //: MainWindow()
 	// Set up action signals and slots
 	connectObjects(); 
 
-	// add items to left panel
+	// Add items to left panel
 	fillStructList();
 	
 	// Open project
