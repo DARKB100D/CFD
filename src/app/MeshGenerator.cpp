@@ -10,7 +10,7 @@ MeshGenerator::~MeshGenerator()
 	
 }
 
-void MeshGenerator::generateMesh(QString in, QString out)
+void MeshGenerator::generateMesh(QString in, QString out, int Format)
 {
 	gmsh::initialize();
 
@@ -25,6 +25,9 @@ void MeshGenerator::generateMesh(QString in, QString out)
 	gmsh::option::setNumber("Mesh.CharacteristicLengthFactor", config->CharacteristicLengthFactor);
 	gmsh::option::setNumber("Mesh.CharacteristicLengthMin", config->CharacteristicLengthMin);
 	gmsh::option::setNumber("Mesh.CharacteristicLengthMax", config->CharacteristicLengthMax);
+	gmsh::option::setNumber("Mesh.Format", Format);
+	gmsh::option::setNumber("Mesh.MshFileVersion", 2.2);
+	
 
 	gmsh::merge(in.toStdString());
 

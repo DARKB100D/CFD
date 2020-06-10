@@ -120,3 +120,21 @@ void Converter::vtkUnstructuredGrid_ToVTKXMLFile(QString path, vtkUnstructuredGr
 void Converter::vtkUnstructuredGrid_ToMSHFile(QString path, vtkUnstructuredGrid * data)
 {
 }
+
+void Converter::vtkUnstructuredGrid_ToVTKOldFile(QString path, vtkUnstructuredGrid * data)
+{
+}
+
+void Converter::vtkUnstructuredGrid_ToPLYFile(QString path, vtkUnstructuredGrid * data)
+{
+	//vtkSmartPointer<vtkDataSetSurfaceFilter> filter = vtkSmartPointer<vtkDataSetSurfaceFilter>::New();
+	vtkSmartPointer<vtkUnstructuredGridGeometryFilter> filter = vtkSmartPointer<vtkUnstructuredGridGeometryFilter>::New();
+	filter->SetInputData(data);
+	filter->Update();
+
+	vtkSmartPointer<vtkPLYWriter> polyDataWriter = vtkSmartPointer<vtkPLYWriter>::New();
+	polyDataWriter->SetFileName(path.toUtf8());
+	polyDataWriter->SetInputData(filter->GetOutput());
+	polyDataWriter->SetFileTypeToASCII();
+	polyDataWriter->Write();
+}

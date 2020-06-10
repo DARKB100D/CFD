@@ -19,6 +19,8 @@
 #include <vtkXMLUnstructuredGridReader.h>
 #include <vtkUnstructuredGridWriter.h>
 #include <vtkXMLUnstructuredGridWriter.h>
+#include <vtkDataSetSurfaceFilter.h>
+#include <vtkUnstructuredGridGeometryFilter.h>
 
 #include <vtkTecplotReader.h>
 
@@ -30,7 +32,6 @@ class Converter
 {
 
 public:
-	void vtkPolyData_ToTable(SolverResult * result);
 	static void geometryFile_ToVtkPolyData(QString inputFileName, vtkPolyData * data);
 	static void vtkPolyData_ToVtkFile(QString path, vtkPolyData * data);
 	static void vtkPolyData_ToVtkXMLFile(QString path, vtkPolyData * data);
@@ -39,5 +40,7 @@ public:
 	static void vtkUnstructuredGrid_ToVTKFile(QString path, vtkUnstructuredGrid * data);
 	static void vtkUnstructuredGrid_ToVTKXMLFile(QString path, vtkUnstructuredGrid * data);
 	static void vtkUnstructuredGrid_ToMSHFile(QString path, vtkUnstructuredGrid * data);
+	static void vtkUnstructuredGrid_ToPLYFile(QString path, vtkUnstructuredGrid * data);
+	static void vtkUnstructuredGrid_ToVTKOldFile(QString path, vtkUnstructuredGrid * data);
 };
 
